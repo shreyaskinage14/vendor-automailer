@@ -3,7 +3,7 @@ const router = express.Router()
 const nodemailer = require('nodemailer')
 const path = require('path')
 
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
     try {
         let data = req.body
         console.log(data);
