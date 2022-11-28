@@ -22,12 +22,11 @@ router.post("/", async (req, res) => {
         let mailOptions = {
             from: 'Shreyas Sanjay Kinage <shreyaskinage14@gmail.com>',
             to: data.email,
-            subject: `${data.name}, a Query for ${data.type} has been raised`,
+            subject: `${data.name}, a Query from OMG Vendor Portal has been raised`,
             html: `
-        <h3>${data.type} Query</h3>
-        <p>${data.query}</p>
-        <p>Please login to your vendor account and rectify the query asap.</p>
-        <a href="https://testing-omg.vercel.app/">Click to Open Vendor Portal</a>
+        <h2>${data.type} Query</h3>
+        <h3>${data.query}</h3>
+        <p>Please login to your vendor account and rectify the query asap. <a href="https://testing-omg.vercel.app/">Click to Open Vendor Portal</a></p>
         `
         }
 
