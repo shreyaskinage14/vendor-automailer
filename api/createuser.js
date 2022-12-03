@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
             to: data.email,
             subject: `Welcome ${data.name} to Vendor Portal`,
             html: `
-        <h2>You have been invited as an Introducer in the Vendor Portal.</h3>
+        <h2>You have been invited as an ${data.usertype} in the Vendor Portal.</h3>
         <h3>PFB your Login Credentials to login and start referring</h3>
         <p>EmailID: ${data.email}</p>
         <p>Password: ${data.password}</p>
