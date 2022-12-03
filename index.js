@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const mail = require('./api/mail');
+const createuser = require('./api/createuser');
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.use(bodyParser.urlencoded({ externded: false }))
 app.use(cors())
 
 app.use("/api/mail", mail);
+app.use("/api/createuser", createuser);
 
 // app.use('/api/sendMail', (req, res) => {
 
