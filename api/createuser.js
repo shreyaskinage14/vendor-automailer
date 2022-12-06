@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
         <p>EmailID: ${data.email}</p>
         <p>Password: ${data.password}</p>
         Login to <a href="https://testing-omg.vercel.app/">Vendor Portal</a>
-        <p>Before logging to the portal, please verify your account. The verification link has been sent to your email. Please check spam folder, if not found</p>
+        <p><b>Note: Before logging to the portal, please verify your account. The verification link has been sent to your email. Please check spam folder, if not found</b></p>
         `
         }
 
