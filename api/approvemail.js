@@ -40,9 +40,9 @@ router.post("/", async (req, res) => {
                     </li>
                 </ul>
                 <div style="display: flex; justify-content: flex-start;">
-                    <a type='button' href="https://testing-omg.vercel.app/" style="margin-right: 10px; padding: 5px 10px; border-radius: 8px; text-decoration: none; background-color: green; color: #FFF;">Approve</a>
-                    <a type='button' href="https://testing-omg.vercel.app/" style="margin-right: 10px; padding: 5px 10px; border-radius: 8px; text-decoration: none; background-color: #1E429F; color: #FFF;">Approve as Exception</a>
-                    <a type='button' href="https://testing-omg.vercel.app/" style="margin-right: 10px; padding: 5px 10px; border-radius: 8px; text-decoration: none; background-color: #FF0000; color: #FFF;">Deny</a>
+                    <a type='button' href="https://testing-omg.vercel.app/approve/${data.uid}?accept" style="margin-right: 10px; padding: 5px 10px; border-radius: 8px; text-decoration: none; background-color: green; color: #FFF;">Approve</a>
+                    <a type='button' href="https://testing-omg.vercel.app/approve/${data.uid}?acceptasexception" style="margin-right: 10px; padding: 5px 10px; border-radius: 8px; text-decoration: none; background-color: #1E429F; color: #FFF;">Approve as Exception</a>
+                    <a type='button' href="https://testing-omg.vercel.app/approve/${data.uid}?deny" style="margin-right: 10px; padding: 5px 10px; border-radius: 8px; text-decoration: none; background-color: #FF0000; color: #FFF;">Deny</a>
                 </div>
             </div>
         `
