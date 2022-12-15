@@ -13,7 +13,7 @@ app.use(cors())
 
 app.use("/api/mail", mail);
 app.use("/api/createuser", createuser);
-app.use("/api/approve", approvemail);
+app.use("/api/approvemail", approvemail);
 
 // app.use('/api/sendMail', (req, res) => {
 

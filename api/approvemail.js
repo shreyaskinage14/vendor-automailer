@@ -18,29 +18,33 @@ router.post("/", async (req, res) => {
                 rejectUnauthorized: false,
             }
         })
-
         let mailOptions = {
             from: 'Shreyas Sanjay Kinage <shreyaskinage14@gmail.com>',
             to: data.email,
             subject: `Please Approve ${data.name} for Vendor Portal`,
             html: `
-            <div style="display: "flex"; flex-direction: "column";">
-                <ul>
-                    <li><b>Name: </b>${data.name}</li>
-                    <li><b>Email: </b>${data.email}</li>
-                    <li><b>Location: </b>${data.location}</li>
-                    <li><b>Pan Number: </b>${data.pan}</li>
-                    <li>
-                        <b>Remarks: </b>
-                        <br>
-                        <ul>
-                            <li><b>GST Team: </b>${remarks.gstteam}</li>
-                            <li><b>Vendor Team: </b>${remarks.vendorteam}</li>
-                        </ul>
+            <div style="display: 'flex'; flex-direction: 'column';  font-size: 16px">
+                <ul style="list-style: none; padding-left: 0px; padding: 0px;">
+                    <li style="margin-bottom: 0px; margin-bottom: 10px"><b>Name:</b><br> ${data.name}</li> 
+                    <li style="margin-bottom: 0px; margin-bottom: 10px"><b>Email:</b><br> ${data.email}</li>
+                    <li style="margin-bottom: 0px; margin-bottom: 10px"><b>Location:</b><br> ${data.location}</li>
+                    <li style="margin-bottom: 0px; margin-bottom: 0px"><b>Pan Number:</b><br> ${data.pan}</li>
+                    <li><div style="display: flex; justify-content: flex-start;">
+                        <div style="word-break: break-all;">
+                            <p><b>GST Team Remarks: </b><br>${data.remarks.gstteam}</p>
+                        </div>
+                        <div style="margin-left: 100px; word-break: break-all;">
+                            <p><b>Vendor Team Remarks: </b><br>${data.remarks.vendorteam}</p>
+                        </div>
+                    </div>
                     </li>
                 </ul>
+                <div style="display: flex; justify-content: flex-start;">
+                    <a type='button' href="https://testing-omg.vercel.app/" style="margin-right: 10px; padding: 5px 10px; border-radius: 8px; text-decoration: none; background-color: green; color: #FFF;">Approve</a>
+                    <a type='button' href="https://testing-omg.vercel.app/" style="margin-right: 10px; padding: 5px 10px; border-radius: 8px; text-decoration: none; background-color: #1E429F; color: #FFF;">Approve as Exception</a>
+                    <a type='button' href="https://testing-omg.vercel.app/" style="margin-right: 10px; padding: 5px 10px; border-radius: 8px; text-decoration: none; background-color: #FF0000; color: #FFF;">Deny</a>
+                </div>
             </div>
-            
         `
         }
 
@@ -54,6 +58,7 @@ router.post("/", async (req, res) => {
             }
         })
     } catch (error) {
+        console.log(error);
         return res.status(500).send("Server Error");
     }
 })
