@@ -22,14 +22,25 @@ router.post("/", async (req, res) => {
         let mailOptions = {
             from: 'Shreyas Sanjay Kinage <shreyaskinage14@gmail.com>',
             to: data.email,
-            subject: `Welcome ${data.name} to Vendor Portal`,
+            subject: `Please Approve ${data.name} for Vendor Portal`,
             html: `
-        <h2>You have been invited as an ${data.usertype} in the Vendor Portal.</h3>
-        <h3>PFB your Login Credentials to login</h3>
-        <p>EmailID: ${data.email}</p>
-        <p>Password: ${data.password}</p>
-        Login to <a href="https://testing-omg.vercel.app/">Vendor Portal</a>
-        <p><b>Note: Before logging to the portal, please verify your account. The verification link has been sent to your email. Please check spam folder, if not found</b></p>
+            <div style="display: "flex"; flex-direction: "column";">
+                <ul>
+                    <li><b>Name: </b>${data.name}</li>
+                    <li><b>Email: </b>${data.email}</li>
+                    <li><b>Location: </b>${data.location}</li>
+                    <li><b>Pan Number: </b>${data.pan}</li>
+                    <li>
+                        <b>Remarks: </b>
+                        <br>
+                        <ul>
+                            <li><b>GST Team: </b>${remarks.gstteam}</li>
+                            <li><b>Vendor Team: </b>${remarks.vendorteam}</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
         `
         }
 
