@@ -11,8 +11,8 @@ router.post("/", async (req, res) => {
             port: 465,
             secure: true,
             auth: {
-                user: 'shreyaskinage14@gmail.com',
-                pass: 'xfquwaskymdeixue',
+                user: 'xcage584@gmail.com',
+                pass: 'sxpzijhfvpbakznp',
             },
             tls: {
                 rejectUnauthorized: false,
@@ -49,6 +49,7 @@ router.post("/", async (req, res) => {
         }
 
         smtptransport.sendMail(mailOptions, (err, info) => {
+            console.log(err);
             if (err) {
                 res.json({ message: err });
                 res.send({ message: err });

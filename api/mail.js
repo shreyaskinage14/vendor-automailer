@@ -11,9 +11,13 @@ router.post("/", async (req, res) => {
             port: 465,
             secure: true,
             auth: {
-                user: 'shreyaskinage14@gmail.com',
-                pass: 'xfquwaskymdeixue',
+                user: 'xcage584@gmail.com',
+                pass: 'sxpzijhfvpbakznp',
             },
+            // auth: {
+            //     user: 'shreyaskinage14@gmail.com',
+            //     pass: 'xfquwaskymdeixue',
+            // },
             tls: {
                 rejectUnauthorized: false,
             }
