@@ -13,18 +13,7 @@ app.use(cors())
 
 app.use("/api/mail", mail);
 app.use("/api/createuser", createuser);
-app.use("/api/approvemail", approvemail);
-
-// app.use('/api/sendMail', (req, res) => {
-
-
-
-// })
-
-// app.get("/", (req, res) => {
-//     app.use(express.static(path.resolve(__dirname, 'client', 'build')))
-//     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-// })
+// app.use("/api/approvemail", approvemail);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
