@@ -6,7 +6,7 @@ const mail = require('./api/mail');
 const app = express();
 
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ externded: false }))
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors())
 
 app.use("/api/mail", mail);
