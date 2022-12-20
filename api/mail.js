@@ -203,7 +203,7 @@ router.post("/welcomemail", async (req, res) => {
             `
 
         let mailOptions = {
-            from: 'Shreyas Sanjay Kinage <shreyaskinage14@gmail.com>',
+            from: 'Shreyas Sanjay Kinage <xcage584@gmail.com>',
             to: data.email,
             cc: data.introducerEmail,
             subject: `Welcome Onboard, ${data.name}`,
@@ -217,7 +217,7 @@ router.post("/welcomemail", async (req, res) => {
 
         console.log(data);
 
-        if (data.email) {
+        if (data.email && data.introducerEmail) {
             smtptransport.sendMail(mailOptions, (err, info) => {
                 if (err) {
                     console.log(err);
