@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
             secure: true,
             auth: {
                 user: 'xcage584@gmail.com',
-                pass: 'sxpzijhfvpbakznp',
+                pass: 'bbtlesdxflskcteg',
             },
             // auth: {
             //     user: 'shreyaskinage14@gmail.com',
@@ -58,14 +58,14 @@ router.post("/approvemail", async (req, res) => {
             secure: true,
             auth: {
                 user: 'xcage584@gmail.com',
-                pass: 'sxpzijhfvpbakznp',
+                pass: 'bbtlesdxflskcteg',
             },
             tls: {
                 rejectUnauthorized: false,
             }
         })
         let mailOptions = {
-            from: 'Shreyas Sanjay Kinage <shreyaskinage14@gmail.com>',
+            from: 'Shreyas Sanjay Kinage <xcage584@gmail.com>',
             to: data.email,
             subject: `Please Approve ${data.name} for Vendor Portal`,
             html: `
@@ -104,6 +104,8 @@ router.post("/approvemail", async (req, res) => {
                 res.send({ message: `Email send to ${data.name} successfully`, messageID: info.messageId });
             }
         })
+
+        smtptransport.close();
     } catch (error) {
         console.log(error);
         return res.status(500).send("Server Error");
@@ -119,7 +121,7 @@ router.post("/createuser", async (req, res) => {
             secure: true,
             auth: {
                 user: 'xcage584@gmail.com',
-                pass: 'sxpzijhfvpbakznp',
+                pass: 'bbtlesdxflskcteg',
             },
             tls: {
                 rejectUnauthorized: false,
@@ -127,7 +129,7 @@ router.post("/createuser", async (req, res) => {
         })
 
         let mailOptions = {
-            from: 'Shreyas Sanjay Kinage <shreyaskinage14@gmail.com>',
+            from: 'Shreyas Sanjay Kinage <xcage584@gmail.com>',
             to: data.email,
             cc: data.introducerEmail,
             subject: `Welcome ${data.name} to Vendor Portal`,
@@ -151,6 +153,7 @@ router.post("/createuser", async (req, res) => {
                 res.send({ message: `Email send to ${data.name} successfully`, messageID: info.messageId });
             }
         })
+        smtptransport.close();
     } catch (error) {
         return res.status(500).send("Server Error");
     }
@@ -165,15 +168,24 @@ router.post("/welcomemail", async (req, res) => {
             secure: true,
             auth: {
                 user: 'xcage584@gmail.com',
-                pass: 'sxpzijhfvpbakznp',
+                pass: 'bbtlesdxflskcteg',
             },
             tls: {
                 rejectUnauthorized: false,
             }
         });
 
-
-        const onboard = `
+        let mailOptions = {
+            from: 'Shreyas Sanjay Kinage <xcage584@gmail.com>',
+            to: data.email,
+            cc: data.introducerEmail,
+            subject: `Welcome Onboard, ${data.name}`,
+            attachments: [{
+                filename: 'download.png',
+                path: 'images/download.png',
+                cid: 'omg@bannerimage'
+            }],
+            html: `
             <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
             <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" style="width:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0">
             <head>
@@ -200,19 +212,7 @@ router.post("/welcomemail", async (req, res) => {
     </div>
     </body>
     </html>
-            `
-
-        let mailOptions = {
-            from: 'Shreyas Sanjay Kinage <xcage584@gmail.com>',
-            to: data.email,
-            cc: data.introducerEmail,
-            subject: `Welcome Onboard, ${data.name}`,
-            attachments: [{
-                filename: 'download.png',
-                path: 'images/download.png',
-                cid: 'omg@bannerimage'
-            }],
-            html: onboard,
+            `,
         }
 
         console.log(data);
@@ -227,6 +227,7 @@ router.post("/welcomemail", async (req, res) => {
                     res.json({ message: `Email send to ${data.name} successfully`, messageID: info.messageId });
                     res.send({ message: `Email send to ${data.name} successfully`, messageID: info.messageId });
                 }
+                smtptransport.close();
             })
         }
     } catch (error) {
