@@ -133,8 +133,7 @@ router.post("/createuser", async (req, res) => {
             to: data.email,
             cc: data.introducerEmail,
             subject: `Welcome ${data.name} to Vendor Portal`,
-            html: `<p>Welcome Onboard</p>`,
-            amp: `
+            html: `
         <h2>You have been invited as an ${data.usertype} in the Vendor Portal.</h3>
         <h3>PFB your Login Credentials to login</h3>
         <p>EmailID: ${data.email}</p>
