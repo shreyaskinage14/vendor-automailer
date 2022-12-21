@@ -177,7 +177,7 @@ router.post("/welcomemail", async (req, res) => {
         let mailOptions = {
             from: 'Shreyas Sanjay Kinage <xcage584@gmail.com>',
             to: data.email,
-            cc: data.introducerEmail,
+            cc: `${data.introducerEmail}, gsthelpdeskapindia@omnicommediagroup.com`,
             subject: `Welcome Onboard, ${data.name}`,
             attachments: [{
                 filename: 'download.png',
