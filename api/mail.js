@@ -189,16 +189,11 @@ router.post("/welcomemail", async (req, res) => {
         let mailOptions = {
             from: 'Shreyas Sanjay Kinage <xcage584@gmail.com>',
             // to: data.email,
-            to: data.action == "deny" ? `xcage584@gmail.com, shivamnarkhede11@gmail.com` : `${data.email}, xcage584@gmail.com, shivamnarkhede11@gmail.com`,
-            // to: data.action == "deny" ? `${data.introducerEmail}, gsthelpdeskapindia@omnicommediagroup.com` : `${data.email}, ${data.introducerEmail}, gsthelpdeskapindia@omnicommediagroup.com`,
+            // to: data.action == "deny" ? `xcage584@gmail.com, shivamnarkhede11@gmail.com` : `${data.email}, xcage584@gmail.com, shivamnarkhede11@gmail.com`,
+            to: data.action == "deny" ? `${data.introducerEmail}, gsthelpdeskapindia@omnicommediagroup.com` : `${data.email}, ${data.introducerEmail}, gsthelpdeskapindia@omnicommediagroup.com`,
             // cc: `shreyaskinage14@gmail.com`,
             // cc: `${data.introducerEmail}, gsthelpdeskapindia@omnicommediagroup.com`,
             subject: `${title}, ${data.name}`,
-            // attachments: [{
-            //     filename: 'download.png',
-            //     path: 'https://firebasestorage.googleapis.com/v0/b/omg-vendor-portal.appspot.com/o/download.png?alt=media&token=99813458-00cd-46b5-8f4a-3a0cc2323b92',
-            //     cid: 'omg@bannerimage'
-            // }],
             html: `
             <div class="es-wrapper-color" style="background-color:transparent">
             <!--[if gte mso 9]><v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t"> <v:fill type="tile" color="transparent"></v:fill> </v:background><![endif]--><table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;padding:0;Margin:0;width:100%;height:100%;background-repeat:repeat;background-position:center top;background-color:transparent"><tr style="border-collapse:collapse"><td valign="top" style="padding:0;Margin:0"><table class="es-content" cellspacing="0" cellpadding="0" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%"><tr style="border-collapse:collapse"><td style="padding:0;Margin:0;background-color:#fafafa" bgcolor="#fafafa" align="center"><table class="es-content-body" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#ffffff;width:600px" cellspacing="0" cellpadding="0" bgcolor="#ffffff" align="center"><tr style="border-collapse:collapse"><td align="left" style="padding:0;Margin:0;padding-top:20px"><table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px"><tr style="border-collapse:collapse"><td valign="top" align="center" style="padding:0;Margin:0;width:600px"><table style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-position:left top" width="100%" cellspacing="0" cellpadding="0" role="presentation"><tr style="border-collapse:collapse"><td align="center" style="padding:0;Margin:0;font-size:0px"><img src="https://firebasestorage.googleapis.com/v0/b/omg-vendor-portal.appspot.com/o/download.png?alt=media&token=99813458-00cd-46b5-8f4a-3a0cc2323b92" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" class="adapt-img" width="600" height="150"></td>
