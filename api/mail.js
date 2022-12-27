@@ -64,7 +64,7 @@ router.post("/approvemail", async (req, res) => {
         })
         let mailOptions = {
             from: 'Shreyas Sanjay Kinage <xcage584@gmail.com>',
-            to: 'raghuraaman.janakiraman@omnicommediagroup.com',
+            to: 'naresh.chippa@omnicommediagroup.com',
             subject: `Please Approve ${data.name} for Vendor Portal`,
             html: `
             <div style="display: 'flex'; flex-direction: 'column';  font-size: 16px">
