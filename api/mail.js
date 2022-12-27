@@ -189,8 +189,8 @@ router.post("/welcomemail", async (req, res) => {
         let mailOptions = {
             from: 'Shreyas Sanjay Kinage <xcage584@gmail.com>',
             // to: data.email,
-            // to: data.action == "deny" ? `xcage584@gmail.com, shivamnarkhede11@gmail.com` : `${data.email}, xcage584@gmail.com, shivamnarkhede11@gmail.com`,
-            to: data.action == "deny" ? `${data.introducerEmail}, gsthelpdeskapindia@omnicommediagroup.com` : `${data.email}, ${data.introducerEmail}, gsthelpdeskapindia@omnicommediagroup.com`,
+            to: data.action == "deny" ? `xcage584@gmail.com, shivamnarkhede11@gmail.com` : `${data.email}, xcage584@gmail.com, shivamnarkhede11@gmail.com`,
+            // to: data.action == "deny" ? `${data.introducerEmail}, gsthelpdeskapindia@omnicommediagroup.com` : `${data.email}, ${data.introducerEmail}, gsthelpdeskapindia@omnicommediagroup.com`,
             // cc: `shreyaskinage14@gmail.com`,
             // cc: `${data.introducerEmail}, gsthelpdeskapindia@omnicommediagroup.com`,
             subject: `${title}, ${data.name}`,
