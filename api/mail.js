@@ -224,6 +224,47 @@ router.post("/welcomemail", async (req, res) => {
     }
 })
 
+router.post("/sendgst", async (req, res) => {
+    try {
+        let data = req.body
+        let smtptransport = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true,
+            auth: {
+                user: 'shivamnarkhede11@gmail.com',
+                pass: 'txopgcyilvlpgsvi',
+            },
+            tls: {
+                rejectUnauthorized: false,
+            }
+        })
+
+        let mailOptions = {
+            from: 'Shreyas Sanjay Kinage <xcage584@gmail.com>',
+            to: data.email,
+            subject: ` ${data.name} added GSTIN Number`,
+            html: `
+            <p>Vendor ${data.name} with ${data.gstin}, have registered on the portal.</p>
+            <p>Please verify the same via the portal, <a href="https://omg-vendor-admin.vercel.app/">click here</a></p>
+            `
+        }
+
+        smtptransport.sendMail(mailOptions, (err, info) => {
+            if (err) {
+                res.json({ message: err });
+                res.send({ message: err });
+            } else {
+                res.json({ message: `Email send to ${data.name} successfully`, messageID: info.messageId });
+                res.send({ message: `Email send to ${data.name} successfully`, messageID: info.messageId });
+            }
+        })
+        smtptransport.close();
+    } catch (error) {
+        return res.status(500).send("Server Error");
+    }
+})
+
 module.exports = router;
 
 
