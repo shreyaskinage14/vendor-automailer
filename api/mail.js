@@ -22,11 +22,9 @@ router.post("/sendquery", async (req, res) => {
 
         const { bank, einvoicing, general, vendorform, msa, nonapplicability } =
             data.queries;
-
         let mailOptions = {
             from: `GSTAP Team <${process.env.EMAIL}>`,
-            to: data.email,
-            cc: data.introducerEmail,
+            to: `${data.email}, ${data.introducerEmail}`,
             subject: `${data.name}, queries have been raised from the Vendor Portal.`,
             html: `
         <div>
