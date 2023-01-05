@@ -27,7 +27,7 @@ router.post("/sendquery", async (req, res) => {
             data.queries;
 
         let mailOptions = {
-            from: "Shreyas Sanjay Kinage <shreyaskinage14@gmail.com>",
+            from: "GSTAP Team <shreyaskinage14@gmail.com>",
             to: data.email,
             cc: data.introducerEmail,
             subject: `${data.name}, queries have been raised from the Vendor Portal.`,
@@ -107,6 +107,7 @@ router.post("/sendquery", async (req, res) => {
                 });
             }
         });
+        smtptransport.close();
     } catch (error) {
         console.log(error);
         return res.status(500).send(error);
@@ -130,8 +131,8 @@ router.post("/approvemail", async (req, res) => {
         });
         let mailOptions = {
             from: "Shreyas Sanjay Kinage <xcage584@gmail.com>",
-            // to: 'naresh.chippa@omnicommediagroup.com',
-            to: "shreyaskinage14@gmail.com",
+            to: 'naresh.chippa@omnicommediagroup.com',
+            // to: "shreyaskinage14@gmail.com",
             subject: `Please Approve ${data.name} for Vendor Portal`,
             html: `
                 <div style="display: flex; flex-direction: row;  font-size: 16px; padding: 10px;">
@@ -200,7 +201,7 @@ router.post("/createuser", async (req, res) => {
             from: "Shreyas Sanjay Kinage <xcage584@gmail.com>",
             to: data.email,
             // to: 'shreyaskinage14@gmail.com',
-            cc: data.introducerEmail,
+            // cc: data.introducerEmail,
             subject: `Welcome ${data.name} to Vendor Portal`,
             html: `
         <h2> You have been invited as an ${data.usertype} in the Vendor Portal.</h2>
