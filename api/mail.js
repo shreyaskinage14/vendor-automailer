@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
+require('dotenv').config()
 // const db = require("./../firebase");
 
 router.post("/sendquery", async (req, res) => {
@@ -11,13 +12,9 @@ router.post("/sendquery", async (req, res) => {
             port: 465,
             secure: true,
             auth: {
-                user: "shivamnarkhede11@gmail.com",
-                pass: "txopgcyilvlpgsvi",
+                user: process.env.EMAIL,
+                pass: process.env.EMAILPWD,
             },
-            // auth: {
-            //     user: 'shreyaskinage14@gmail.com',
-            //     pass: 'xfquwaskymdeixue',
-            // },
             tls: {
                 rejectUnauthorized: false,
             },
@@ -27,7 +24,7 @@ router.post("/sendquery", async (req, res) => {
             data.queries;
 
         let mailOptions = {
-            from: "GSTAP Team <shreyaskinage14@gmail.com>",
+            from: `GSTAP Team <${process.env.EMAIL}>`,
             to: data.email,
             cc: data.introducerEmail,
             subject: `${data.name}, queries have been raised from the Vendor Portal.`,
@@ -122,15 +119,15 @@ router.post("/approvemail", async (req, res) => {
             port: 465,
             secure: true,
             auth: {
-                user: "shivamnarkhede11@gmail.com",
-                pass: "txopgcyilvlpgsvi",
+                user: process.env.EMAIL,
+                pass: process.env.EMAILPWD,
             },
             tls: {
                 rejectUnauthorized: false,
             },
         });
         let mailOptions = {
-            from: "Shreyas Sanjay Kinage <xcage584@gmail.com>",
+            from: `GSTAP Team <${process.env.EMAIL}>`,
             to: 'naresh.chippa@omnicommediagroup.com',
             // to: "shreyaskinage14@gmail.com",
             subject: `Please Approve ${data.name} for Vendor Portal`,
@@ -189,8 +186,8 @@ router.post("/createuser", async (req, res) => {
             port: 465,
             secure: true,
             auth: {
-                user: "shivamnarkhede11@gmail.com",
-                pass: "txopgcyilvlpgsvi",
+                user: process.env.EMAIL,
+                pass: process.env.EMAILPWD,
             },
             tls: {
                 rejectUnauthorized: false,
@@ -198,7 +195,7 @@ router.post("/createuser", async (req, res) => {
         });
 
         let mailOptions = {
-            from: "Shreyas Sanjay Kinage <xcage584@gmail.com>",
+            from: `GSTAP Team <${process.env.EMAIL}>`,
             to: data.email,
             // to: 'shreyaskinage14@gmail.com',
             // cc: data.introducerEmail,
@@ -253,8 +250,8 @@ router.post("/welcomemail", async (req, res) => {
             port: 465,
             secure: true,
             auth: {
-                user: "shivamnarkhede11@gmail.com",
-                pass: "txopgcyilvlpgsvi",
+                user: process.env.EMAIL,
+                pass: process.env.EMAILPWD,
             },
             tls: {
                 rejectUnauthorized: false,
@@ -264,7 +261,7 @@ router.post("/welcomemail", async (req, res) => {
         const title = getActionType();
 
         let mailOptions = {
-            from: "Shreyas Sanjay Kinage <xcage584@gmail.com>",
+            from: `GSTAP Team <${process.env.EMAIL}>`,
             // to: data.email,
             // to:
             //     data.action == "deny"
@@ -318,8 +315,8 @@ router.post("/sendgst", async (req, res) => {
             port: 465,
             secure: true,
             auth: {
-                user: "shivamnarkhede11@gmail.com",
-                pass: "txopgcyilvlpgsvi",
+                user: process.env.EMAIL,
+                pass: process.env.EMAILPWD,
             },
             tls: {
                 rejectUnauthorized: false,
@@ -327,7 +324,7 @@ router.post("/sendgst", async (req, res) => {
         });
 
         let mailOptions = {
-            from: "Shreyas Sanjay Kinage <xcage584@gmail.com>",
+            from: `GSTAP Team <${process.env.EMAIL}>`,
             to: 'rukesh.chippa2@omnicommediagroup.com',
             subject: `${data.name} added GSTIN Number`,
             html: `
