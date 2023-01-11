@@ -83,6 +83,7 @@ router.post("/sendquery", async (req, res) => {
                     : ""}
             </div>
         </div >
+        <p>Please ignore the resolved queries</p>
         <p>Please login to your vendor account and resolve the queries, <a href="https://testing-omg.vercel.app/">click here</a></p>
     `,
         };
