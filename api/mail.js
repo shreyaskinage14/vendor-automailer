@@ -1,15 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
-require('dotenv').config()
+require("dotenv").config();
 // const db = require("./../firebase");
 
 router.post("/sendquery", async (req, res) => {
     try {
         let data = req.body;
         let smtptransport = nodemailer.createTransport({
-            host: process.env.SMTPHOST,
-            port: process.env.SMTPPORT,
+            host: "smtp.gmail.com",
+            port: 465,
             secure: true,
             auth: {
                 user: process.env.EMAIL,
@@ -22,6 +22,7 @@ router.post("/sendquery", async (req, res) => {
 
         const { bank, einvoicing, general, vendorform, msa, nonapplicability } =
             data.queries;
+
         let mailOptions = {
             from: `Vendor Empanelment <${process.env.EMAIL}>`,
             to: `${data.email}, ${data.introducerEmail}`,
@@ -29,58 +30,81 @@ router.post("/sendquery", async (req, res) => {
             html: `
         <div>
             <div style="display:flex; font-size: 16px;">
-            ${general ?
-                    `<div style="width: 50%; font-size: 14px;">
+            ${general
+                    ? `<div style="width: 50%; font-size: 14px;">
                         <p style="margin-bottom: 0px;"><b>General</b></p>
                         <ol style="margin: 0px; padding: 0px;">
-                            ${general.map((b) => `<li style="font-weight: 400">${b.title}</li>`)}
+                            ${general.map(
+                        (b) =>
+                            `<li style="font-weight: 400">${b.title}</li>`
+                    )}
                         </ol>
                     </div> `
-                    : ""}
-                ${bank ?
-                    `<div style="width: 50%; font-size: 14px;">
+                    : ""
+                }
+                ${bank
+                    ? `<div style="width: 50%; font-size: 14px;">
                         <p style="margin-bottom: 0px;"><b>Bank</b></p>
                         <ol>
-                            ${bank.map((b) => `<li style="font-weight: 400">${b.title}</li>`)}
+                            ${bank.map(
+                        (b) =>
+                            `<li style="font-weight: 400">${b.title}</li>`
+                    )}
                         </ol>
                     </div> `
-                    : ""}
+                    : ""
+                }
             </div>
             <div style="display:flex; font-size: 16px;">
-            ${einvoicing ?
-                    `<div style="width: 50%; font-size: 14px;">
+            ${einvoicing
+                    ? `<div style="width: 50%; font-size: 14px;">
                         <p style="margin-bottom: 0px;"><b>E-Invoicing</b></p>
                         <ol>
-                            ${einvoicing.map((b) => `<li style="font-weight: 400">${b.title}</li>`)}
+                            ${einvoicing.map(
+                        (b) =>
+                            `<li style="font-weight: 400">${b.title}</li>`
+                    )}
                         </ol>
                     </div> `
-                    : ""}
-                ${vendorform ?
-                    `<div style="width: 50%; font-size: 14px;">
-                        <p style="margin-bottom: 0px;"><b>Vendor Form</b></p>
-                        <ol>
-                            ${vendorform.map((b) => `<li style="font-weight: 400">${b.title}</li>`)}
-                        </ol>
-                    </div> `
-                    : ""}
+                    : ""
+                }
+            ${vendorform
+                    ? `<div style="width: 50%; font-size: 14px;">
+                    <p style="margin-bottom: 0px;"><b>Vendor Form</b></p>
+                    <ol>
+                        ${vendorform.map(
+                        (b) => `<li style="font-weight: 400">${b.title}</li>`
+                    )}
+                    </ol>
+                </div> `
+                    : ""
+                }
             </div>
             <div style="display:flex; font-size: 16px;">
-            ${msa ?
-                    `<div style="width: 50%; font-size: 14px;">
+            ${msa
+                    ? `<div style="width: 50%; font-size: 14px;">
                         <p style="margin-bottom: 0px;"><b>Master Service Agreement</b></p>
                         <ol>
-                            ${msa.map((b) => `<li style="font-weight: 400">${b.title}</li>`)}
+                            ${msa.map(
+                        (b) =>
+                            `<li style="font-weight: 400">${b.title}</li>`
+                    )}
                         </ol>
                     </div> `
-                    : ""}
-            ${nonapplicability ?
-                    `<div style="width: 50%; font-size: 14px;">
+                    : ""
+                }
+            ${nonapplicability
+                    ? `<div style="width: 50%; font-size: 14px;">
                         <p style="margin-bottom: 0px;"><b>Non-applicability of GST</b></p>
                         <ol>
-                            ${nonapplicability.map((b) => `<li style="font-weight: 400">${b.title}</li>`)}
+                            ${nonapplicability.map(
+                        (b) =>
+                            `<li style="font-weight: 400">${b.title}</li>`
+                    )}
                         </ol>
                     </div> `
-                    : ""}
+                    : ""
+                }
             </div>
         </div >
         <p>Please ignore the resolved queries</p>
@@ -89,6 +113,7 @@ router.post("/sendquery", async (req, res) => {
         };
 
         smtptransport.sendMail(mailOptions, (err, info) => {
+            console.log(err, info);
             if (err) {
                 res.json({ message: err });
                 res.send({ message: err });
@@ -114,8 +139,8 @@ router.post("/approvemail", async (req, res) => {
     try {
         let data = req.body;
         let smtptransport = nodemailer.createTransport({
-            host: process.env.SMTPHOST,
-            port: process.env.SMTPPORT,
+            host: "smtp.gmail.com",
+            port: 465,
             secure: true,
             auth: {
                 user: process.env.EMAIL,
@@ -127,7 +152,7 @@ router.post("/approvemail", async (req, res) => {
         });
         let mailOptions = {
             from: `Vendor Empanelment <${process.env.EMAIL}>`,
-            to: 'naresh.chippa@omnicommediagroup.com',
+            to: "naresh.chippa@omnicommediagroup.com",
             // to: "shreyaskinage14@gmail.com",
             subject: `Please Approve ${data.name} for Vendor Portal`,
             html: `
@@ -181,8 +206,8 @@ router.post("/createuser", async (req, res) => {
     try {
         let data = req.body;
         let smtptransport = nodemailer.createTransport({
-            host: process.env.SMTPHOST,
-            port: process.env.SMTPPORT,
+            host: "smtp.gmail.com",
+            port: 465,
             secure: true,
             auth: {
                 user: process.env.EMAIL,
@@ -243,8 +268,8 @@ router.post("/welcomemail", async (req, res) => {
             }
         }
         let smtptransport = nodemailer.createTransport({
-            host: process.env.SMTPHOST,
-            port: process.env.SMTPPORT,
+            host: "smtp.gmail.com",
+            port: 465,
             secure: true,
             auth: {
                 user: process.env.EMAIL,
@@ -260,7 +285,10 @@ router.post("/welcomemail", async (req, res) => {
         let mailOptions = {
             from: `Vendor Empanelment <${process.env.EMAIL}>`,
             // to: data.email,
-            to: data.action == "deny" ? `${data.introducerEmail} ` : `${data.email}, ${data.introducerEmail} `,
+            to:
+                data.action == "deny"
+                    ? `${data.introducerEmail} `
+                    : `${data.email}, ${data.introducerEmail} `,
             subject: `${title}, ${data.name} `,
             html: `
         <div class="es-wrapper-color" style="background-color:transparent">
@@ -302,8 +330,8 @@ router.post("/sendgst", async (req, res) => {
     try {
         let data = req.body;
         let smtptransport = nodemailer.createTransport({
-            host: process.env.SMTPHOST,
-            port: process.env.SMTPPORT,
+            host: "smtp.gmail.com",
+            port: 465,
             secure: true,
             auth: {
                 user: process.env.EMAIL,
@@ -316,7 +344,7 @@ router.post("/sendgst", async (req, res) => {
 
         let mailOptions = {
             from: `Vendor Empanelment <${process.env.EMAIL}>`,
-            to: 'rukesh.chippa2@omnicommediagroup.com',
+            to: "rukesh.chippa2@omnicommediagroup.com",
             subject: `${data.name} added GSTIN Number`,
             html: `
         <p> Vendor <b> ${data.name}</b> with <b>${data.gstin}</b> GSTIN Number, have registered on the portal.</p>
