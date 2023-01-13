@@ -8,8 +8,8 @@ router.post("/sendquery", async (req, res) => {
     try {
         let data = req.body;
         let smtptransport = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 465,
+            host: process.env.SMTPHOST,
+            port: process.env.SMTPPORT,
             secure: true,
             auth: {
                 user: process.env.EMAIL,
@@ -23,7 +23,7 @@ router.post("/sendquery", async (req, res) => {
         const { bank, einvoicing, general, vendorform, msa, nonapplicability } =
             data.queries;
         let mailOptions = {
-            from: `GSTAP Team <${process.env.EMAIL}>`,
+            from: `Vendor Empanelment <${process.env.EMAIL}>`,
             to: `${data.email}, ${data.introducerEmail}`,
             subject: `${data.name}, queries have been raised from the Vendor Portal.`,
             html: `
@@ -114,8 +114,8 @@ router.post("/approvemail", async (req, res) => {
     try {
         let data = req.body;
         let smtptransport = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 465,
+            host: process.env.SMTPHOST,
+            port: process.env.SMTPPORT,
             secure: true,
             auth: {
                 user: process.env.EMAIL,
@@ -126,7 +126,7 @@ router.post("/approvemail", async (req, res) => {
             },
         });
         let mailOptions = {
-            from: `GSTAP Team <${process.env.EMAIL}>`,
+            from: `Vendor Empanelment <${process.env.EMAIL}>`,
             to: 'naresh.chippa@omnicommediagroup.com',
             // to: "shreyaskinage14@gmail.com",
             subject: `Please Approve ${data.name} for Vendor Portal`,
@@ -181,8 +181,8 @@ router.post("/createuser", async (req, res) => {
     try {
         let data = req.body;
         let smtptransport = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 465,
+            host: process.env.SMTPHOST,
+            port: process.env.SMTPPORT,
             secure: true,
             auth: {
                 user: process.env.EMAIL,
@@ -194,10 +194,8 @@ router.post("/createuser", async (req, res) => {
         });
 
         let mailOptions = {
-            from: `GSTAP Team <${process.env.EMAIL}>`,
+            from: `Vendor Empanelment <${process.env.EMAIL}>`,
             to: data.email,
-            // to: 'shreyaskinage14@gmail.com',
-            // cc: data.introducerEmail,
             subject: `Welcome ${data.name} to Vendor Portal`,
             html: `
         <h2> You have been invited as an ${data.usertype} in the Vendor Portal.</h2>
@@ -245,8 +243,8 @@ router.post("/welcomemail", async (req, res) => {
             }
         }
         let smtptransport = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 465,
+            host: process.env.SMTPHOST,
+            port: process.env.SMTPPORT,
             secure: true,
             auth: {
                 user: process.env.EMAIL,
@@ -260,15 +258,9 @@ router.post("/welcomemail", async (req, res) => {
         const title = getActionType();
 
         let mailOptions = {
-            from: `GSTAP Team <${process.env.EMAIL}>`,
+            from: `Vendor Empanelment <${process.env.EMAIL}>`,
             // to: data.email,
-            // to:
-            //     data.action == "deny"
-            //         ? `xcage584@gmail.com, shivamnarkhede11@gmail.com`
-            //         : `${data.email}, xcage584@gmail.com, shivamnarkhede11@gmail.com`,
             to: data.action == "deny" ? `${data.introducerEmail} ` : `${data.email}, ${data.introducerEmail} `,
-            // cc: `shreyaskinage14 @gmail.com`,
-            // cc: `${ data.introducerEmail }, gsthelpdeskapindia @omnicommediagroup.com`,
             subject: `${title}, ${data.name} `,
             html: `
         <div class="es-wrapper-color" style="background-color:transparent">
@@ -310,8 +302,8 @@ router.post("/sendgst", async (req, res) => {
     try {
         let data = req.body;
         let smtptransport = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 465,
+            host: process.env.SMTPHOST,
+            port: process.env.SMTPPORT,
             secure: true,
             auth: {
                 user: process.env.EMAIL,
@@ -323,7 +315,7 @@ router.post("/sendgst", async (req, res) => {
         });
 
         let mailOptions = {
-            from: `GSTAP Team <${process.env.EMAIL}>`,
+            from: `Vendor Empanelment <${process.env.EMAIL}>`,
             to: 'rukesh.chippa2@omnicommediagroup.com',
             subject: `${data.name} added GSTIN Number`,
             html: `
