@@ -152,7 +152,8 @@ router.post("/approvemail", async (req, res) => {
         });
         let mailOptions = {
             from: `Vendor Empanelment <${process.env.EMAIL}>`,
-            to: "naresh.chippa@omnicommediagroup.com",
+            // to: "naresh.chippa@omnicommediagroup.com",
+            to: "raghuraaman.janakiraman@omnicommediagroup.com",
             // to: "shreyaskinage14@gmail.com",
             subject: `Please Approve ${data.name} for Vendor Portal`,
             html: `
