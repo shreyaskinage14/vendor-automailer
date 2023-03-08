@@ -8,15 +8,11 @@ router.post("/sendquery", async (req, res) => {
     try {
         let data = req.body;
         let smtptransport = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 465,
-            secure: true,
+            host: process.env.SMTPHOST,
+            port: process.env.SMTPPORT,
             auth: {
                 user: process.env.EMAIL,
                 pass: process.env.EMAILPWD,
-            },
-            tls: {
-                rejectUnauthorized: false,
             },
         });
 
@@ -24,7 +20,7 @@ router.post("/sendquery", async (req, res) => {
             data.queries;
 
         let mailOptions = {
-            from: `Vendor Empanelment <${process.env.EMAIL}>`,
+            from: `${process.env.FROMEMAIL}`,
             to: `${data.email}, ${data.introducerEmail}`,
             subject: `${data.name}, queries have been raised from the Vendor Portal.`,
             html: `
@@ -119,11 +115,11 @@ router.post("/sendquery", async (req, res) => {
                 res.send({ message: err });
             } else {
                 res.json({
-                    message: `Email send to ${data.name} successfully`,
+                    message: `Email send successfully`,
                     messageID: info.messageId,
                 });
                 res.send({
-                    message: `Email send to ${data.name} successfully`,
+                    message: `Email send successfully`,
                     messageID: info.messageId,
                 });
             }
@@ -139,19 +135,15 @@ router.post("/approvemail", async (req, res) => {
     try {
         let data = req.body;
         let smtptransport = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 465,
-            secure: true,
+            host: process.env.SMTPHOST,
+            port: process.env.SMTPPORT,
             auth: {
                 user: process.env.EMAIL,
                 pass: process.env.EMAILPWD,
             },
-            tls: {
-                rejectUnauthorized: false,
-            },
         });
         let mailOptions = {
-            from: `Vendor Empanelment <${process.env.EMAIL}>`,
+            from: `${process.env.FROMEMAIL}`,
             // to: "naresh.chippa@omnicommediagroup.com",
             to: "raghuraaman.janakiraman@omnicommediagroup.com",
             // to: "shreyaskinage14@gmail.com",
@@ -207,20 +199,16 @@ router.post("/createuser", async (req, res) => {
     try {
         let data = req.body;
         let smtptransport = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 465,
-            secure: true,
+            host: process.env.SMTPHOST,
+            port: process.env.SMTPPORT,
             auth: {
                 user: process.env.EMAIL,
                 pass: process.env.EMAILPWD,
             },
-            tls: {
-                rejectUnauthorized: false,
-            },
         });
 
         let mailOptions = {
-            from: `Vendor Empanelment <${process.env.EMAIL}>`,
+            from: `${process.env.FROMEMAIL}`,
             to: data.email,
             subject: `Welcome ${data.name} to Vendor Portal`,
             html: `
@@ -239,11 +227,11 @@ router.post("/createuser", async (req, res) => {
                 res.send({ message: err });
             } else {
                 res.json({
-                    message: `Email send to ${data.name} successfully`,
+                    message: `Email send successfully`,
                     messageID: info.messageId,
                 });
                 res.send({
-                    message: `Email send to ${data.name} successfully`,
+                    message: `Email send successfully`,
                     messageID: info.messageId,
                 });
             }
@@ -269,22 +257,18 @@ router.post("/welcomemail", async (req, res) => {
             }
         }
         let smtptransport = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 465,
-            secure: true,
+            host: process.env.SMTPHOST,
+            port: process.env.SMTPPORT,
             auth: {
                 user: process.env.EMAIL,
                 pass: process.env.EMAILPWD,
-            },
-            tls: {
-                rejectUnauthorized: false,
             },
         });
 
         const title = getActionType();
 
         let mailOptions = {
-            from: `Vendor Empanelment <${process.env.EMAIL}>`,
+            from: `${process.env.FROMEMAIL}`,
             // to: data.email,
             to:
                 data.action == "deny"
@@ -331,20 +315,16 @@ router.post("/sendgst", async (req, res) => {
     try {
         let data = req.body;
         let smtptransport = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 465,
-            secure: true,
+            host: process.env.SMTPHOST,
+            port: process.env.SMTPPORT,
             auth: {
                 user: process.env.EMAIL,
                 pass: process.env.EMAILPWD,
             },
-            tls: {
-                rejectUnauthorized: false,
-            },
         });
 
         let mailOptions = {
-            from: `Vendor Empanelment <${process.env.EMAIL}>`,
+            from: `${process.env.FROMEMAIL}`,
             to: "rukesh.chippa2@omnicommediagroup.com",
             subject: `${data.name} added GSTIN Number`,
             html: `
