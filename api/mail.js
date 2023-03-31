@@ -157,6 +157,15 @@ router.post("/approvemail", async (req, res) => {
                         <li style="margin-bottom: 0px; margin-bottom: 0px"><b>Pan Number:</b><br> ${data.pan}</li>
                         <li><div style="display: flex; justify-content: flex-start;">
                             <div style="word-break: break-all;">
+                                <p><b>Introducer Name: </b><br>${data.introducerName}</p>
+                            </div>
+                            <div style="margin-left: 100px; word-break: break-all;">
+                                <p><b>Introducer Email: </b><br>${data.introducerEmail}</p>
+                            </div>
+                            </div>
+                        </li>
+                        <li><div style="display: flex; justify-content: flex-start;">
+                            <div style="word-break: break-all;">
                                 <p><b>GST Team Remarks: </b><br>${data.remarks.gstteam}</p>
                             </div>
                             <div style="margin-left: 100px; word-break: break-all;">
