@@ -22,7 +22,7 @@ router.post("/sendquery", async (req, res) => {
         let mailOptions = {
             from: `${process.env.FROMEMAIL}`,
             to: `${data.email}, ${data.introducerEmail}`,
-            subject: `${data.name}, queries have been raised from the Vendor Portal.`,
+            subject: `${data.name}, queries have been raised from the Onboarding Portal.`,
             html: `
         <div>
             <div style="display:flex; font-size: 16px;">
@@ -147,7 +147,7 @@ router.post("/approvemail", async (req, res) => {
             // to: "naresh.chippa@omnicommediagroup.com",
             to: "raghuraaman.janakiraman@omnicommediagroup.com",
             // to: "shreyaskinage14@gmail.com",
-            subject: `Please Approve ${data.name} for Vendor Portal`,
+            subject: `Please Approve ${data.name} for Onboarding Portal`,
             html: `
                 <div style="display: flex; flex-direction: row;  font-size: 16px; padding: 10px;">
                     <ul style="list-style: none; padding-left: 0px; padding: 0px;">
@@ -155,6 +155,7 @@ router.post("/approvemail", async (req, res) => {
                         <li style="margin-bottom: 0px; margin-bottom: 10px"><b>Email:</b><br> ${data.email}</li>
                         <li style="margin-bottom: 0px; margin-bottom: 10px"><b>Location:</b><br> ${data.location}</li>
                         <li style="margin-bottom: 0px; margin-bottom: 0px"><b>Pan Number:</b><br> ${data.pan}</li>
+                        <li style="margin-bottom: 0px; margin-bottom: 0px"><b>Vendor Type:</b><br> ${data.vendorType}</li>
                         <li><div style="display: flex; justify-content: flex-start;">
                             <div style="word-break: break-all;">
                                 <p><b>Introducer Name: </b><br>${data.introducerName}</p>
@@ -219,13 +220,13 @@ router.post("/createuser", async (req, res) => {
         let mailOptions = {
             from: `${process.env.FROMEMAIL}`,
             to: data.email,
-            subject: `Welcome ${data.name} to Vendor Portal`,
+            subject: `Welcome ${data.name} to Onboarding Portal`,
             html: `
-        <h2> You have been invited as an ${data.usertype} in the Vendor Portal.</h2>
+        <h2> You have been invited as an ${data.usertype} in the Onboarding Portal.</h2>
         <h3>PFB your Login Credentials to login</h3>
-        <p>EmailID: ${data.email}</p>
+        <p>Email ID: ${data.email}</p>
         <p>Password: ${data.password}</p>
-        Login to <a href = "https://vendorportal.omnicommediagroup.in/"> Vendor Portal</a>
+        Login to the <a href = "https://vendorportal.omnicommediagroup.in/"> Portal</a>
         <p><b>Note: Before logging to the portal, please verify your account. The verification link has been sent to your email. Please check spam folder, if not found</b></p>
     `,
         };
@@ -338,7 +339,7 @@ router.post("/sendgst", async (req, res) => {
             subject: `${data.name} added GSTIN Number`,
             html: `
         <p> Vendor <b> ${data.name}</b> with <b>${data.gstin}</b> GSTIN Number, have registered on the portal.</p>
-            <p>Please validate GST filing status on Portal, <a href="https://omg-vendor-admin.vercel.app/">click here</a></p>
+            <p>Please validate GST filing status on Portal, <a href="https://admin.omnicommediagroup.in/">click here</a></p>
     `,
         };
 
