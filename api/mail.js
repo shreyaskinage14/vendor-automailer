@@ -222,7 +222,7 @@ router.post("/createuser", async (req, res) => {
             to: data.email,
             subject: `Welcome ${data.name} to Onboarding Portal`,
             html: `
-        <h2> You have been invited as an ${data.usertype} in the Onboarding Portal.</h2>
+        <h2> You have been invited to the Onboarding Portal.</h2>
         <h3>PFB your Login Credentials to login</h3>
         <p>Email ID: ${data.email}</p>
         <p>Password: ${data.password}</p>
