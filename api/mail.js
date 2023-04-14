@@ -104,7 +104,7 @@ router.post("/sendquery", async (req, res) => {
             </div>
         </div >
         <p>Please ignore the resolved queries</p>
-        <p>Please login to your vendor account and resolve the queries, <a href="https://https://vendoronboarding.omnicommediagroup.in/">click here</a></p>
+        <p>Please login to your vendor account and resolve the queries, <a href="https://vendoronboarding.omnicommediagroup.in/">click here</a></p>
     `,
         };
 
