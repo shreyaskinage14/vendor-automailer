@@ -21,7 +21,7 @@ router.post("/sendquery", async (req, res) => {
 
         let mailOptions = {
             from: `${process.env.FROMEMAIL}`,
-            to: `${data.email}, ${data.introducerEmail}`,
+            to: `${data.email}, ${data.introducerEmail}, ${process.env.FROMEMAIL}`,
             subject: `${data.name}, queries have been raised from the Onboarding Portal.`,
             html: `
         <div>
@@ -105,7 +105,7 @@ router.post("/sendquery", async (req, res) => {
         </div >
         <p>Please ignore the resolved queries</p>
         <p>Please login to your vendor account and resolve the queries, <a href="https://vendorportal.omnicommediagroup.in/">click here</a></p>
-    `,
+    `
         };
 
         smtptransport.sendMail(mailOptions, (err, info) => {
@@ -145,7 +145,7 @@ router.post("/approvemail", async (req, res) => {
         let mailOptions = {
             from: `${process.env.FROMEMAIL}`,
             // to: "naresh.chippa@omnicommediagroup.com",
-            to: "raghuraaman.janakiraman@omnicommediagroup.com",
+            to: `raghuraaman.janakiraman@omnicommediagroup.com, ${process.env.FROMEMAIL}`,
             // to: "shreyaskinage14@gmail.com",
             subject: `Please Approve ${data.name} for Onboarding Portal`,
             html: `
@@ -282,8 +282,8 @@ router.post("/welcomemail", async (req, res) => {
             // to: data.email,
             to:
                 data.action == "deny"
-                    ? `${data.introducerEmail} `
-                    : `${data.email}, ${data.introducerEmail} `,
+                    ? `${data.introducerEmail} ${process.env.FROMEMAIL}`
+                    : `${data.email}, ${data.introducerEmail} ${process.env.FROMEMAIL}`,
             subject: `${title}, ${data.name} `,
             html: `
         <div class="es-wrapper-color" style="background-color:transparent">
@@ -335,7 +335,7 @@ router.post("/sendgst", async (req, res) => {
 
         let mailOptions = {
             from: `${process.env.FROMEMAIL}`,
-            to: "rukesh.chippa2@omnicommediagroup.com",
+            to: `rukesh.chippa2@omnicommediagroup.com, ${process.env.FROMEMAIL}`,
             subject: `${data.name} added GSTIN Number`,
             html: `
         <p> Vendor <b> ${data.name}</b> with <b>${data.gstin}</b> GSTIN Number, have registered on the portal.</p>
