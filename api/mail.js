@@ -145,35 +145,21 @@ router.post("/approvemail", async (req, res) => {
         let mailOptions = {
             from: `${process.env.FROMEMAIL}`,
             // to: "naresh.chippa@omnicommediagroup.com",
-            to: `raghuraaman.janakiraman@omnicommediagroup.com, ${process.env.FROMEMAIL}`,
+            to: `raghuraaman.janakiraman@omnicommediagroup.com`,
             // to: "shreyaskinage14@gmail.com",
             subject: `Please Approve ${data.name} for Onboarding Portal`,
             html: `
                 <div style="display: flex; flex-direction: row;  font-size: 16px; padding: 10px;">
                     <ul style="list-style: none; padding-left: 0px; padding: 0px;">
-                        <li style="margin-bottom: 0px; margin-bottom: 10px"><b>Name:</b><br> ${data.name}</li> 
-                        <li style="margin-bottom: 0px; margin-bottom: 10px"><b>Email:</b><br> ${data.email}</li>
-                        <li style="margin-bottom: 0px; margin-bottom: 10px"><b>Location:</b><br> ${data.location}</li>
-                        <li style="margin-bottom: 0px; margin-bottom: 0px"><b>Pan Number:</b><br> ${data.pan}</li>
-                        <li style="margin-bottom: 0px; margin-bottom: 0px"><b>Vendor Type:</b><br> ${data.vendorType}</li>
-                        <li><div style="display: flex; justify-content: flex-start;">
-                            <div style="word-break: break-all;">
-                                <p><b>Introducer Name: </b><br>${data.introducerName}</p>
-                            </div>
-                            <div style="margin-left: 100px; word-break: break-all;">
-                                <p><b>Introducer Email: </b><br>${data.introducerEmail}</p>
-                            </div>
-                            </div>
-                        </li>
-                        <li><div style="display: flex; justify-content: flex-start;">
-                            <div style="word-break: break-all;">
-                                <p><b>GST Team Remarks: </b><br>${data.remarks.gstteam}</p>
-                            </div>
-                            <div style="margin-left: 100px; word-break: break-all;">
-                                <p><b>Vendor Team Remarks: </b><br>${data.remarks.vendorteam}</p>
-                            </div>
-                            </div>
-                        </li>
+                        <li style="margin-bottom: 10px"><b>Name:</b><br> ${data.name}</li> 
+                        <li style="margin-bottom: 10px"><b>Email:</b><br> ${data.email}</li>
+                        <li style="margin-bottom: 10px"><b>Location:</b><br> ${data.location}</li>
+                        <li style="margin-bottom: 10px"><b>Pan Number:</b><br> ${data.pan}</li>
+                        <li style="margin-bottom: 10px"><b>Vendor Type:</b><br> ${data.vendorType}</li>
+                        <li style="margin-bottom: 10px"><b>Introducer Name: </b><br>${data.introducerName}</li>
+                        <li style="margin-bottom: 10px"><b>Introducer Email: </b><br>${data.introducerEmail}</li>
+                        <li style="margin-bottom: 10px"><b>GST Team Remarks: </b><br>${data.remarks.gstteam}</li>
+                        <li style="margin-bottom: 10px"><b>Vendor Team Remarks: </b><br>${data.remarks.vendorteam}</li>
                     </ul>
                 </div>
                 <div>
