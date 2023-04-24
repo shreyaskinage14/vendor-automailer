@@ -104,7 +104,7 @@ router.post("/sendquery", async (req, res) => {
             </div>
         </div >
         <p>Please ignore the resolved queries</p>
-        <p>Please login to your vendor account and resolve the queries, <a href="https://vendoronboarding.omnicommediagroup.in/">click here</a></p>
+        <p>Please login to your account and resolve the queries, <a href="https://vendoronboarding.omnicommediagroup.in/">click here</a></p>
     `,
         };
 
@@ -212,7 +212,7 @@ router.post("/createuser", async (req, res) => {
         <h3>PFB your Login Credentials to login</h3>
         <p>Email ID: ${data.email}</p>
         <p>Password: ${data.password}</p>
-        Login to the <a href = "https://vendoronboarding.omnicommediagroup.in/"> Portal</a>
+        Login to the <a href = ${data.usertype == "Trainee" ? "https://traineeonboarding.omnicommediagroup.in/" : "https://vendoronboarding.omnicommediagroup.in/"}> Portal</a>
         <p><b>Note: Before logging to the portal, please verify your account. The verification link has been sent to your email. Please check spam folder, if not found</b></p>
     `,
         };
