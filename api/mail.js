@@ -16,7 +16,7 @@ router.post("/sendquery", async (req, res) => {
             },
         });
 
-        const { bank, einvoicing, general, vendorform, msa, nonapplicability } =
+        const { bank, einvoicing, general, vendorform, msa, nongst } =
             data.queries;
 
         let mailOptions = {
@@ -89,11 +89,11 @@ router.post("/sendquery", async (req, res) => {
                     </div> `
                     : ""
                 }
-            ${nonapplicability
+            ${nongst
                     ? `<div style="width: 50%; font-size: 14px;">
                         <p style="margin-bottom: 0px;"><b>Non-applicability of GST</b></p>
                         <ol>
-                            ${nonapplicability.map(
+                            ${nongst.map(
                         (b) =>
                             `<li style="font-weight: 400">${b.title}</li>`
                     )}
