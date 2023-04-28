@@ -145,7 +145,7 @@ router.post("/approvemail", async (req, res) => {
         let mailOptions = {
             from: `${process.env.FROMEMAIL}`,
             // to: "naresh.chippa@omnicommediagroup.com",
-            to: `raghuraaman.janakiraman@omnicommediagroup.com`,
+            to: `raghuraaman.janakiraman@omnicommediagroup.com, ${process.env.FROMEMAIL}`,
             // to: "shreyaskinage14@gmail.com",
             subject: `Please Approve ${data.name} for Onboarding Portal`,
             html: `
