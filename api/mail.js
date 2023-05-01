@@ -16,7 +16,7 @@ router.post("/sendquery", async (req, res) => {
             },
         });
 
-        const { bank, einvoicing, general, vendorform, msa, nonapplicability } =
+        const { bank, einvoicing, general, vendorform, msa, nongst } =
             data.queries;
 
         let mailOptions = {
@@ -84,11 +84,11 @@ router.post("/sendquery", async (req, res) => {
                     </div> `
                     : ""
                 }
-            ${nonapplicability
+            ${nongst
                     ? `<div style="font-size: 14px;">
                         <p style="margin-bottom: 0px;"><b>Non-applicability of GST</b></p>
                         <ol>
-                            ${nonapplicability.map(
+                            ${nongst.map(
                         (b) =>
                             `<li style="font-weight: 400">${b.title}</li>`
                     )}
@@ -139,7 +139,7 @@ router.post("/approvemail", async (req, res) => {
         let mailOptions = {
             from: `${process.env.FROMEMAIL}`,
             // to: "naresh.chippa@omnicommediagroup.com",
-            to: `raghuraaman.janakiraman@omnicommediagroup.com`,
+            to: `raghuraaman.janakiraman@omnicommediagroup.com, ${process.env.FROMEMAIL}`,
             // to: "shreyaskinage14@gmail.com",
             subject: `Please Approve ${data.name} for Onboarding Portal`,
             html: `
