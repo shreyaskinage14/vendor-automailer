@@ -25,9 +25,8 @@ router.post("/sendquery", async (req, res) => {
             subject: `${data.name}, queries have been raised from the Onboarding Portal.`,
             html: `
         <div>
-            <div style="display:flex; font-size: 16px;">
             ${general
-                    ? `<div style="width: 50%; font-size: 14px;">
+                    ? `<div style="font-size: 14px;">
                         <p style="margin-bottom: 0px;"><b>General</b></p>
                         <ol style="margin: 0px; padding: 0px;">
                             ${general.map(
@@ -39,7 +38,7 @@ router.post("/sendquery", async (req, res) => {
                     : ""
                 }
                 ${bank
-                    ? `<div style="width: 50%; font-size: 14px;">
+                    ? `<div style="font-size: 14px;">
                         <p style="margin-bottom: 0px;"><b>Bank</b></p>
                         <ol>
                             ${bank.map(
@@ -50,10 +49,8 @@ router.post("/sendquery", async (req, res) => {
                     </div> `
                     : ""
                 }
-            </div>
-            <div style="display:flex; font-size: 16px;">
             ${einvoicing
-                    ? `<div style="width: 50%; font-size: 14px;">
+                    ? `<div style="font-size: 14px;">
                         <p style="margin-bottom: 0px;"><b>E-Invoicing</b></p>
                         <ol>
                             ${einvoicing.map(
@@ -65,7 +62,7 @@ router.post("/sendquery", async (req, res) => {
                     : ""
                 }
             ${vendorform
-                    ? `<div style="width: 50%; font-size: 14px;">
+                    ? `<div style="font-size: 14px;">
                     <p style="margin-bottom: 0px;"><b>Vendor Form</b></p>
                     <ol>
                         ${vendorform.map(
@@ -75,10 +72,8 @@ router.post("/sendquery", async (req, res) => {
                 </div> `
                     : ""
                 }
-            </div>
-            <div style="display:flex; font-size: 16px;">
             ${msa
-                    ? `<div style="width: 50%; font-size: 14px;">
+                    ? `<div style="font-size: 14px;">
                         <p style="margin-bottom: 0px;"><b>Master Service Agreement</b></p>
                         <ol>
                             ${msa.map(
@@ -90,7 +85,7 @@ router.post("/sendquery", async (req, res) => {
                     : ""
                 }
             ${nonapplicability
-                    ? `<div style="width: 50%; font-size: 14px;">
+                    ? `<div style="font-size: 14px;">
                         <p style="margin-bottom: 0px;"><b>Non-applicability of GST</b></p>
                         <ol>
                             ${nonapplicability.map(
@@ -101,7 +96,6 @@ router.post("/sendquery", async (req, res) => {
                     </div> `
                     : ""
                 }
-            </div>
         </div >
         <p>Please ignore the resolved queries</p>
         <p>Please login to your account and resolve the queries, <a href="https://vendoronboarding.omnicommediagroup.in/">click here</a></p>
@@ -158,6 +152,7 @@ router.post("/approvemail", async (req, res) => {
                         <li style="margin-bottom: 10px"><b>Vendor Type:</b><br> ${data.vendorType}</li>
                         <li style="margin-bottom: 10px"><b>Introducer Name: </b><br>${data.introducerName}</li>
                         <li style="margin-bottom: 10px"><b>Introducer Email: </b><br>${data.introducerEmail}</li>
+                        <li style="margin-bottom: 10px"><b>GST Filing Status: </b><br>${data.gstFillingStatus ? data.gstFillingStatus.toUpperCase() : "NA"}</li>
                         <li style="margin-bottom: 10px"><b>GST Team Remarks: </b><br>${data.remarks.gstteam}</li>
                         <li style="margin-bottom: 10px"><b>Vendor Team Remarks: </b><br>${data.remarks.vendorteam}</li>
                     </ul>
