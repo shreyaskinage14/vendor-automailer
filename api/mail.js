@@ -1,8 +1,32 @@
 const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
+var admin = require("firebase-admin");
+var serviceAccount = require("./serviceAccount.json");
 require("dotenv").config();
 // const db = require("./../firebase");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://omg-vendor-portal-default-rtdb.asia-southeast1.firebasedatabase.app"
+});
+
+router.post('/deleteuser', async (req, res) => {
+  try {
+    const { uid } = req.body;
+    const user = await admin.auth().getUser(uid);
+
+    const emailProvider = user.providerData.find(provider => provider.providerId === 'password');
+    if (emailProvider) {
+      await admin.auth().deleteUser(uid);
+      res.status(200).send({ code: 0, message: 'User Deleted Successfully!' });
+    } else {
+      res.status(400).send({ code: -1, message: 'User does not have an email/password provider.' });
+    }
+  } catch (error) {
+    res.status(500).send({ code: -1, message: `Error deleting email: ${error.message}` });
+  }
+});
 
 router.post("/sendquery", async (req, res) => {
   try {
@@ -24,89 +48,82 @@ router.post("/sendquery", async (req, res) => {
       subject: `${data.name}, queries have been raised from the Onboarding Portal.`,
       html: `
         <div>
-            ${
-              general
-                ? `<div style="font-size: 14px;">
+            ${general
+          ? `<div style="font-size: 14px;">
                         <p style="margin-bottom: 0px;"><b>General</b></p>
                         <ol style="margin: 0px; padding: 0px;">
                             ${general.map(
-                              (b) =>
-                                `<li style="font-weight: 400">${b.title}</li>`
-                            )}
+            (b) =>
+              `<li style="font-weight: 400">${b.title}</li>`
+          )}
                         </ol>
                     </div> `
-                : ""
-            }
-                ${
-                  bank
-                    ? `<div style="font-size: 14px;">
+          : ""
+        }
+                ${bank
+          ? `<div style="font-size: 14px;">
                         <p style="margin-bottom: 0px;"><b>Bank</b></p>
                         <ol>
                             ${bank.map(
-                              (b) =>
-                                `<li style="font-weight: 400">${b.title}</li>`
-                            )}
+            (b) =>
+              `<li style="font-weight: 400">${b.title}</li>`
+          )}
                         </ol>
                     </div> `
-                    : ""
-                }
-            ${
-              einvoicing
-                ? `<div style="font-size: 14px;">
+          : ""
+        }
+            ${einvoicing
+          ? `<div style="font-size: 14px;">
                         <p style="margin-bottom: 0px;"><b>E-Invoicing</b></p>
                         <ol>
                             ${einvoicing.map(
-                              (b) =>
-                                `<li style="font-weight: 400">${b.title}</li>`
-                            )}
+            (b) =>
+              `<li style="font-weight: 400">${b.title}</li>`
+          )}
                         </ol>
                     </div> `
-                : ""
-            }
-            ${
-              vendorform
-                ? `<div style="font-size: 14px;">
+          : ""
+        }
+            ${vendorform
+          ? `<div style="font-size: 14px;">
                     <p style="margin-bottom: 0px;"><b>Vendor Form</b></p>
                     <ol>
                         ${vendorform.map(
-                          (b) => `<li style="font-weight: 400">${b.title}</li>`
-                        )}
+            (b) => `<li style="font-weight: 400">${b.title}</li>`
+          )}
                     </ol>
                 </div> `
-                : ""
-            }
-            ${
-              msa
-                ? `<div style="font-size: 14px;">
+          : ""
+        }
+            ${msa
+          ? `<div style="font-size: 14px;">
                         <p style="margin-bottom: 0px;"><b>Master Service Agreement</b></p>
                         <ol>
                             ${msa.map(
-                              (b) =>
-                                `<li style="font-weight: 400">${b.title}</li>`
-                            )}
+            (b) =>
+              `<li style="font-weight: 400">${b.title}</li>`
+          )}
                         </ol>
                     </div> `
-                : ""
-            }
-            ${
-              nongst
-                ? `<div style="font-size: 14px;">
+          : ""
+        }
+            ${nongst
+          ? `<div style="font-size: 14px;">
                         <p style="margin-bottom: 0px;"><b>Non-applicability of GST</b></p>
                         <ol>
                             ${nongst.map(
-                              (b) =>
-                                `<li style="font-weight: 400">${b.title}</li>`
-                            )}
+            (b) =>
+              `<li style="font-weight: 400">${b.title}</li>`
+          )}
                         </ol>
                     </div> `
-                : ""
-            }
+          : ""
+        }
         </div >
         <p>Please ignore the resolved queries</p>
-        <p>Please login to your account and resolve the queries, <a href=${
-          data?.vendorType == "trainee"
-            ? "https://traineeonboarding.omnicommediagroup.in/"
-            : "https://vendoronboarding.omnicommediagroup.in/"
+        <p>Please login to your account and resolve the queries, <a href=${data?.vendorType == "trainee"
+          ? "https://traineeonboarding.omnicommediagroup.in/"
+          : "https://vendoronboarding.omnicommediagroup.in/"
         }>click here</a></p>
     `,
     };
@@ -154,56 +171,40 @@ router.post("/approvemail", async (req, res) => {
       html: `
                 <div style="display: flex; flex-direction: row;  font-size: 16px; padding: 10px;">
                     <ul style="list-style: none; padding-left: 0px; padding: 0px;">
-                        <li style="margin-bottom: 10px"><b>Name:</b><br> ${
-                          data.name
-                        }</li> 
-                        <li style="margin-bottom: 10px"><b>Email:</b><br> ${
-                          data.email
-                        }</li>
-                        <li style="margin-bottom: 10px"><b>Location:</b><br> ${
-                          data.location
-                        }</li>
-                        <li style="margin-bottom: 10px"><b>Pan Number:</b><br> ${
-                          data.pan
-                        }</li>
-                        <li style="margin-bottom: 10px"><b>Vendor Type:</b><br> ${
-                          data.vendorType
-                        }</li>
-                        <li style="margin-bottom: 10px"><b>Introducer Name: </b><br>${
-                          data.introducerName
-                        }</li>
-                        <li style="margin-bottom: 10px"><b>Introducer Email: </b><br>${
-                          data.introducerEmail
-                        }</li>
-                        <li style="margin-bottom: 10px"><b>GST Filing Status: </b><br>${
-                          data.gstFillingStatus
-                            ? data.gstFillingStatus.toUpperCase()
-                            : "NA"
-                        }</li>
-                        <li style="margin-bottom: 10px"><b>GST Team Remarks: </b><br>${
-                          data.remarks.gstteam
-                        }</li>
-                        <li style="margin-bottom: 10px"><b>Vendor Team Remarks: </b><br>${
-                          data.remarks.vendorteam
-                        }</li>
+                        <li style="margin-bottom: 10px"><b>Name:</b><br> ${data.name
+        }</li> 
+                        <li style="margin-bottom: 10px"><b>Email:</b><br> ${data.email
+        }</li>
+                        <li style="margin-bottom: 10px"><b>Location:</b><br> ${data.location
+        }</li>
+                        <li style="margin-bottom: 10px"><b>Pan Number:</b><br> ${data.pan
+        }</li>
+                        <li style="margin-bottom: 10px"><b>Vendor Type:</b><br> ${data.vendorType
+        }</li>
+                        <li style="margin-bottom: 10px"><b>Introducer Name: </b><br>${data.introducerName
+        }</li>
+                        <li style="margin-bottom: 10px"><b>Introducer Email: </b><br>${data.introducerEmail
+        }</li>
+                        <li style="margin-bottom: 10px"><b>GST Filing Status: </b><br>${data.gstFillingStatus
+          ? data.gstFillingStatus.toUpperCase()
+          : "NA"
+        }</li>
+                        <li style="margin-bottom: 10px"><b>GST Team Remarks: </b><br>${data.remarks.gstteam
+        }</li>
+                        <li style="margin-bottom: 10px"><b>Vendor Team Remarks: </b><br>${data.remarks.vendorteam
+        }</li>
                     </ul>
                 </div>
                 <div>
-                    <a type='button' href="https://vendoronboarding.omnicommediagroup.in/approve/${
-                      data.uid
-                    }?action=accept&vendorName=${
-        data.name
-      }" style="margin-right: 10px; padding: 5px 10px; border-radius: 8px; text-decoration: none; background-color: green; color: #FFF;">Approve</a>
-                    <a type='button' href="https://vendoronboarding.omnicommediagroup.in/approve/${
-                      data.uid
-                    }?action=acceptasexception&vendorName=${
-        data.name
-      }" style="margin-right: 10px; padding: 5px 10px; border-radius: 8px; text-decoration: none; background-color: #1E429F; color: #FFF;">Approve as Exception</a>
-                    <a type='button' href="https://vendoronboarding.omnicommediagroup.in/approve/${
-                      data.uid
-                    }?action=deny&vendorName=${
-        data.name
-      }" style="margin-right: 10px; padding: 5px 10px; border-radius: 8px; text-decoration: none; background-color: #FF0000; color: #FFF;">Deny</a>
+                    <a type='button' href="https://vendoronboarding.omnicommediagroup.in/approve/${data.uid
+        }?action=accept&vendorName=${data.name
+        }" style="margin-right: 10px; padding: 5px 10px; border-radius: 8px; text-decoration: none; background-color: green; color: #FFF;">Approve</a>
+                    <a type='button' href="https://vendoronboarding.omnicommediagroup.in/approve/${data.uid
+        }?action=acceptasexception&vendorName=${data.name
+        }" style="margin-right: 10px; padding: 5px 10px; border-radius: 8px; text-decoration: none; background-color: #1E429F; color: #FFF;">Approve as Exception</a>
+                    <a type='button' href="https://vendoronboarding.omnicommediagroup.in/approve/${data.uid
+        }?action=deny&vendorName=${data.name
+        }" style="margin-right: 10px; padding: 5px 10px; border-radius: 8px; text-decoration: none; background-color: #FF0000; color: #FFF;">Deny</a>
                 </div>
         `,
     };
@@ -244,7 +245,7 @@ router.post("/approveauditor", async (req, res) => {
       from: `${process.env.FROMEMAIL}`,
       // to: "naresh.chippa@omnicommediagroup.com",
       to: `raghuraaman.janakiraman@omnicommediagroup.com, ${process.env.FROMEMAIL}`,
-    //   to: "shreyaskinage14@gmail.com",
+      //   to: "shreyaskinage14@gmail.com",
       subject: `Please Approve ${data.name} as Auditor for Onboarding Portal`,
       html: `
                 <div style="display: flex; flex-direction: row;  font-size: 16px; padding: 10px;">
@@ -392,10 +393,9 @@ router.post("/createuser", async (req, res) => {
         <h3>PFB your Login Credentials to login</h3>
         <p>Email ID: ${data.email}</p>
         <p>Password: ${data.password}</p>
-        Login to the <a href = ${
-          data.usertype == "Trainee"
-            ? "https://traineeonboarding.omnicommediagroup.in/"
-            : "https://vendoronboarding.omnicommediagroup.in/"
+        Login to the <a href = ${data.usertype == "Trainee"
+          ? "https://traineeonboarding.omnicommediagroup.in/"
+          : "https://vendoronboarding.omnicommediagroup.in/"
         }> Portal</a>
         <p><b>Note: Before logging to the portal, please verify your account. The verification link has been sent to your email. Please check spam folder, if not found</b></p>
     `,
