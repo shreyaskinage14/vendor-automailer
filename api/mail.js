@@ -399,7 +399,7 @@ router.post("/createuser", async (req, res) => {
 
     let mailOptions = {
       from: `${process.env.FROMEMAIL}`,
-      to: data.email,
+      to: `${data.email}, ${process.env.FROMEMAIL}`,
       subject: `Welcome ${data.name} to Onboarding Portal`,
       html: `
         <h2> You have been invited to the Onboarding Portal.</h2>
