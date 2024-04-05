@@ -406,6 +406,7 @@ router.post("/createuser", async (req, res) => {
         <h3>PFB your Login Credentials to login</h3>
         <p>Email ID: ${data.email}</p>
         <p>Password: ${data.password}</p>
+        <p>Userid: ${data.userid}</p>
         Login to the <a href = ${data.usertype == "Trainee"
           ? "https://traineeonboarding.omnicommediagroup.in/"
           : "https://vendoronboarding.omnicommediagroup.in/"
