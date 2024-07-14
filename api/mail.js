@@ -549,6 +549,173 @@ router.post("/sendgst", async (req, res) => {
   }
 });
 
+router.post("/sendforapproval", async (req, res) => {
+  try {
+    let data = req.body;
+    let smtptransport = nodemailer.createTransport({
+      host: process.env.SMTPHOST,
+      port: process.env.SMTPPORT,
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.EMAILPWD,
+      },
+    });
+
+    const html = `
+<div style="display: flex; flex-direction: row;  font-size: 16px; padding: 10px;">
+    <ul style="list-style: none; padding-left: 0px; padding: 0px;">
+        <li style="margin-bottom: 10px"><b>Vendor Name:</b><br> ${data.legalName}</li>
+        <li style="margin-bottom: 10px"><b>Address:</b><br> ${data.address}</li>
+        <li style="margin-bottom: 10px"><b>Contact Name:</b><br> ${data.contactName}</li>
+        <li style="margin-bottom: 10px"><b>Phone Number:</b><br> ${data.contactNo}</li>
+        <li style="margin-bottom: 10px"><b>Email Address:</b><br> ${data.emailAddress}</li>
+        <li style="margin-bottom: 10px"><b>Services to be provided by Vendor:</b><br> ${data.services}</li>
+        <li style="margin-bottom: 10px"><b>What is the estimated annual spend with this Vendor?:</b><br> ${data.annualSpend}</li>
+        <li style="margin-bottom: 10px"><b>Is the vendor introduced by Client or Agency?:</b><br> ${data.vendorIntroduced}</li>
+        <li style="margin-bottom: 10px"><b>Is the vendor to be engaged for the specific client Activity? -Please provide the name of the client:</b><br> ${data.vendorEngaged}</li>
+        <li style="margin-bottom: 10px"><b>Is this service restricted to this vendor or any other vendor can give this service:</b><br> ${data.vendorServiceRestricted}</li>
+        <li style="margin-bottom: 10px"><b>Is this client requirements. If yes then please attach the client’s mail:</b><br> ${data.isClientRequirement}</li>
+        <li style="margin-bottom: 10px"><b>Client Email:</b><br> 
+            <a href="${data.clientEmail}" target="_blank" style="color: blue; text-decoration: underline;">View File</a>
+        </li>
+        <li style="margin-bottom: 10px"><b>Are you satisfied the Vendor has the capacity and capability to deliver the service required?:</b><br> ${data.isVendorCapable}</li>
+        <li style="margin-bottom: 10px"><b>Requester's name / title / department:</b><br> ${data.requesterName}</li>
+        <li style="margin-bottom: 10px"><b>Requester Signature:</b><br> 
+            ${data.signImage ? `<img src="${data.signImage}" alt="Sign Image" style="max-width: 100px; max-height: 100px;">` : 'No Sign Image'}
+        </li>
+        <li style="margin-bottom: 10px"><b>Risk Assessment:</b><br> 
+            <a href="${data.riskAssesment}" target="_blank" style="color: blue; text-decoration: underline;">View File</a>
+        </li>
+        <li style="margin-bottom: 10px"><b>Date:</b><br> ${data.date}</li>
+        <br>
+        <br>
+        <li style="margin-bottom: 10px"><b>Introducer:</b><br> ${data.name} (${data.email})</li>
+        <li style="margin-bottom: 10px"><b>Business Head:</b><br> ${data.businessHeadName} (${data.businessHeadEmail})</li>
+        <li style="margin-bottom: 10px"><b>Brand Approver Email:</b><br> ${data.firstApprover}</li>
+        
+    </ul>
+</div>
+<div>
+    <a type='button' href="https://vendoronboarding.omnicommediagroup.in/${data?.approval == "1" ? "firstapprove" : "secondapprove"}/${data.new_useruid}/${data.uid}?action=accept&vendorName=${data.legalName}" style="margin-right: 10px; padding: 15px 20px; border-radius: 8px; text-decoration: none; background-color: green; color: #FFF;">Approve</a>
+    <a type='button' href="https://vendoronboarding.omnicommediagroup.in/${data?.approval == "1" ? "firstapprove" : "secondapprove"}/${data.new_useruid}/${data.uid}?action=reject&vendorName=${data.legalName}" style="margin-right: 10px; padding: 15px 20px; border-radius: 8px; text-decoration: none; background-color: #FF0000; color: #FFF;">Reject</a>
+    <br>
+</div>
+`;
+
+    console.log(html);
+
+
+    // let _mailTo = data.email?.includes("@annalect.com") ? "diwakar.gupta@annalect.com" : "preyash.parekh@omnicommediagroup.com";
+    let mailOptions = {
+      from: `${process.env.FROMEMAIL}`,
+      // to: "naresh.chippa@omnicommediagroup.com",
+      // to: `${data?.businessHeadEmail}, ${process.env.FROMEMAIL}, vikesh.agarwal@omnicommediagroup.com, gsthelpdeskapindia@omnicommediagroup.com`,
+      to: "shreyaskinage14@gmail.com",
+      subject: `Please Approve ${data.legalName} for Onboarding Portal`,
+      html: html,
+    };
+
+    smtptransport.sendMail(mailOptions, (err, info) => {
+      if (err) {
+        res.json({ message: err });
+        res.send({ message: err });
+      } else {
+        res.json({
+          message: `Email send successfully`,
+          messageID: info.messageId,
+        });
+        res.send({
+          message: `Email send successfully`,
+          messageID: info.messageId,
+        });
+      }
+    });
+    smtptransport.close();
+  } catch (error) {
+    return res.status(500).send("Server Error");
+  }
+});
+
+router.post("/finalapprove", async (req, res) => {
+  try {
+    let data = req.body;
+    let smtptransport = nodemailer.createTransport({
+      host: process.env.SMTPHOST,
+      port: process.env.SMTPPORT,
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.EMAILPWD,
+      },
+    });
+
+    const html = `
+<div style="display: flex; flex-direction: row;  font-size: 16px; padding: 10px;">
+    <ul style="list-style: none; padding-left: 0px; padding: 0px;">
+        <li style="margin-bottom: 10px"><b>Vendor Name:</b><br> ${data.legalName}</li>
+        <li style="margin-bottom: 10px"><b>Address:</b><br> ${data.address}</li>
+        <li style="margin-bottom: 10px"><b>Contact Name:</b><br> ${data.contactName}</li>
+        <li style="margin-bottom: 10px"><b>Phone Number:</b><br> ${data.contactNo}</li>
+        <li style="margin-bottom: 10px"><b>Email Address:</b><br> ${data.emailAddress}</li>
+        <li style="margin-bottom: 10px"><b>Client Email:</b><br> 
+            <a href="${data.clientEmail}" target="_blank" style="color: blue; text-decoration: underline;">View File</a>
+        </li>
+        <li style="margin-bottom: 10px"><b>Requester's name / title / department:</b><br> ${data.requesterName}</li>
+        <li style="margin-bottom: 10px"><b>Requester Signature:</b><br> 
+            ${data.signImage ? `<img src="${data.signImage}" alt="Sign Image" style="max-width: 100px; max-height: 100px;">` : 'No Sign Image'}
+        </li>
+        <li style="margin-bottom: 10px"><b>Risk Assessment:</b><br> 
+            <a href="${data.riskAssesment}" target="_blank" style="color: blue; text-decoration: underline;">View File</a>
+        </li>
+        <li style="margin-bottom: 10px"><b>Date:</b><br> ${data.date}</li>
+        <br>
+        <br>
+        <li style="margin-bottom: 10px"><b>Introducer:</b><br> ${data.name} (${data.email})</li>
+        <li style="margin-bottom: 10px"><b>Business Head:</b><br> ${data.businessHeadName} (${data.businessHeadEmail})</li>
+        <li style="margin-bottom: 10px"><b>Brand Approver Email:</b><br> ${data.firstApprover}</li>
+        
+    </ul>
+</div>
+<div>
+    <a type='button' href="https://vendoronboarding.omnicommediagroup.in/finalapproval/${data.new_useruid}/${data.uid}?action=accept&vendorName=${data.legalName}" style="margin-right: 10px; padding: 15px 20px; border-radius: 8px; text-decoration: none; background-color: green; color: #FFF;">Send Invite</a>
+    <a type='button' href="https://vendoronboarding.omnicommediagroup.in/finalapproval/${data.new_useruid}/${data.uid}?action=reject&vendorName=${data.legalName}" style="margin-right: 10px; padding: 15px 20px; border-radius: 8px; text-decoration: none; background-color: #FF0000; color: #FFF;">Reject</a>
+    <br>
+</div>
+`;
+
+    console.log(html);
+
+
+    // let _mailTo = data.email?.includes("@annalect.com") ? "diwakar.gupta@annalect.com" : "preyash.parekh@omnicommediagroup.com";
+    let mailOptions = {
+      from: `${process.env.FROMEMAIL}`,
+      // to: "naresh.chippa@omnicommediagroup.com",
+      // to: `${data?.businessHeadEmail}, ${process.env.FROMEMAIL}, vikesh.agarwal@omnicommediagroup.com, gsthelpdeskapindia@omnicommediagroup.com`,
+      to: "shreyaskinage14@gmail.com",
+      subject: `Please Approve ${data.legalName} for Onboarding Portal`,
+      html: html,
+    };
+
+    smtptransport.sendMail(mailOptions, (err, info) => {
+      if (err) {
+        res.json({ message: err });
+        res.send({ message: err });
+      } else {
+        res.json({
+          message: `Email send successfully`,
+          messageID: info.messageId,
+        });
+        res.send({
+          message: `Email send successfully`,
+          messageID: info.messageId,
+        });
+      }
+    });
+    smtptransport.close();
+  } catch (error) {
+    return res.status(500).send("Server Error");
+  }
+});
+
 // let usersRef = db.collection("users").doc('kXOPD3tjdzaPTLuz3tbEI2FcGu12');
 
 // usersRef.get().then((querySnapshot) => {
