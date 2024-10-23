@@ -175,7 +175,7 @@ router.post("/approvemail", async (req, res) => {
         pass: process.env.EMAILPWD,
       },
     });
-    let _mailTo = data.introducerEmail?.includes("@annalect.com") ? "diwakar.gupta@annalect.com" : "preyash.parekh@omnicommediagroup.com";
+    let _mailTo = data.introducerEmail?.includes("@annalect.com") ? "diwakar.gupta@annalect.com, sumit.grover@annalect.com" : "preyash.parekh@omnicommediagroup.com";
     let mailOptions = {
       from: `${process.env.FROMEMAIL}`,
       // to: "naresh.chippa@omnicommediagroup.com",
