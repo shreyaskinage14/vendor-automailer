@@ -610,7 +610,7 @@ router.post("/sendforapproval", async (req, res) => {
       from: `${process.env.FROMEMAIL}`,
       // to: "naresh.chippa@omnicommediagroup.com",
       // to: `${data?.businessHeadEmail}, ${process.env.FROMEMAIL}, vikesh.agarwal@omnicommediagroup.com, gsthelpdeskapindia@omnicommediagroup.com`,
-      to: "shreyaskinage14@gmail.com",
+      to: `${process.env.FROMEMAIL}, vikesh.agarwal@omnicommediagroup.com, shreyaskinagee@gmail.com`,
       subject: `Please Approve ${data.legalName} for Onboarding Portal`,
       html: html,
     };
@@ -690,7 +690,7 @@ router.post("/finalapprove", async (req, res) => {
       from: `${process.env.FROMEMAIL}`,
       // to: "naresh.chippa@omnicommediagroup.com",
       // to: `${data?.businessHeadEmail}, ${process.env.FROMEMAIL}, vikesh.agarwal@omnicommediagroup.com, gsthelpdeskapindia@omnicommediagroup.com`,
-      to: "shreyaskinage14@gmail.com",
+      to: `${process.env.FROMEMAIL}, vikesh.agarwal@omnicommediagroup.com, shreyaskinagee@gmail.com`,
       subject: `Please Approve ${data.legalName} for Onboarding Portal`,
       html: html,
     };
