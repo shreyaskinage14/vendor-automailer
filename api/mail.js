@@ -135,8 +135,8 @@ router.post("/sendquery", async (req, res) => {
         </div >
         <p>Please ignore the resolved queries</p>
         <p>Please login to your account and resolve the queries, <a href=${data?.vendorType == "trainee"
-          ? "https://traineeonboarding.omnicommediagroup.in/"
-          : "https://vendoronboarding.omnicommediagroup.in/"
+          ? "https://traineeonboarding.omnicommediagroup.co.in/"
+          : "https://vendoronboarding.omnicommediagroup.co.in/"
         }>click here</a></p>
     `,
     };
@@ -210,13 +210,13 @@ router.post("/approvemail", async (req, res) => {
                     </ul>
                 </div>
                 <div>
-                    <a type='button' href="https://vendoronboarding.omnicommediagroup.in/approve/${data.uid
+                    <a type='button' href="https://vendoronboarding.omnicommediagroup.co.in/approve/${data.uid
         }?action=accept&vendorName=${data.name
         }" style="margin-right: 10px; padding: 5px 10px; border-radius: 8px; text-decoration: none; background-color: green; color: #FFF;">Approve</a>
-                    <a type='button' href="https://vendoronboarding.omnicommediagroup.in/approve/${data.uid
+                    <a type='button' href="https://vendoronboarding.omnicommediagroup.co.in/approve/${data.uid
         }?action=acceptasexception&vendorName=${data.name
         }" style="margin-right: 10px; padding: 5px 10px; border-radius: 8px; text-decoration: none; background-color: #1E429F; color: #FFF;">Approve as Exception</a>
-                    <a type='button' href="https://vendoronboarding.omnicommediagroup.in/approve/${data.uid
+                    <a type='button' href="https://vendoronboarding.omnicommediagroup.co.in/approve/${data.uid
         }?action=deny&vendorName=${data.name
         }" style="margin-right: 10px; padding: 5px 10px; border-radius: 8px; text-decoration: none; background-color: #FF0000; color: #FFF;">Deny</a>
                 </div>
@@ -315,7 +315,7 @@ router.post("/createauditor", async (req, res) => {
         <h3>PFB your Login Credentials to login</h3>
         <p>Email ID: ${data.email}</p>
         <p>Password: ${data.password}</p>
-        Login to the <a href="http://admin.omnicommediagroup.in/"}> Portal</a>
+        Login to the <a href="http://admin.omnicommediagroup.co.in/"}> Portal</a>
     `,
     };
 
@@ -361,7 +361,7 @@ router.post("/rejectauditor", async (req, res) => {
         <h3>PFB your Login Credentials to login</h3>
         <p>Email ID: ${data.email}</p>
         <p>Password: ${data.password}</p>
-        Login to the <a href="http://admin.omnicommediagroup.in/"}> Portal</a>
+        Login to the <a href="http://admin.omnicommediagroup.co.in/"}> Portal</a>
     `,
     };
 
@@ -409,8 +409,8 @@ router.post("/createuser", async (req, res) => {
         <p>Password: ${data.password}</p>
         <p>Userid: ${data.userid}</p>
         Login to the <a href = ${data.usertype == "Trainee"
-          ? "https://traineeonboarding.omnicommediagroup.in/"
-          : "https://vendoronboarding.omnicommediagroup.in/"
+          ? "https://traineeonboarding.omnicommediagroup.co.in/"
+          : "https://vendoronboarding.omnicommediagroup.co.in/"
         }> Portal</a>
         <p><b>Note: Before logging to the portal, please verify your account. The verification link has been sent to your email. Please check spam folder, if not found</b></p>
     `,
@@ -475,7 +475,7 @@ router.post("/welcomemail", async (req, res) => {
         <table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;padding:0;Margin:0;width:100%;height:100%;background-repeat:repeat;background-position:center top;background-color:transparent"><tr style="border-collapse:collapse"><td valign="top" style="padding:0;Margin:0"><table class="es-content" cellspacing="0" cellpadding="0" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%"><tr style="border-collapse:collapse"><td style="padding:0;Margin:0;background-color:#fafafa" bgcolor="#fafafa" align="center"><table class="es-content-body" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#ffffff;width:600px" cellspacing="0" cellpadding="0" bgcolor="#ffffff" align="center"><tr style="border-collapse:collapse"><td align="left" style="padding:0;Margin:0;padding-top:20px"><table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px"><tr style="border-collapse:collapse"><td valign="top" align="center" style="padding:0;Margin:0;width:600px"><table style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-position:left top" width="100%" cellspacing="0" cellpadding="0" role="presentation"><tr style="border-collapse:collapse"><td align="center" style="padding:0;Margin:0;font-size:0px"><img src="https://firebasestorage.googleapis.com/v0/b/omg-vendor-portal.appspot.com/o/download.png?alt=media&token=99813458-00cd-46b5-8f4a-3a0cc2323b92" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" class="adapt-img" width="600" height="150"></td>
     </tr><tr style="border-collapse:collapse"><td align="center" style="padding:0;Margin:0;padding-top:25px;padding-bottom:25px"><h1 style="Margin:0;line-height:42px;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:28px;font-style:normal;font-weight:normal;color:#333333"><b>${title}</b></h1><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:27px;color:#333333;font-size:18px">${data.name}</p></td>
         </tr><tr style="border-collapse:collapse"><td align="center" style="padding:20px;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:24px;color:#333333;font-size:16px">As a leading global media network, Omnicom Media Group (OMG) sets itself apart with an agile, client-first approach that helps businesses thrive today and into the future. With more than 21,000 employees globally, OMG has the talent, expertise and clout to deliver unprecedented levels of innovation for our clients.</p></td>
-        </tr><tr style="border-collapse:collapse"><td align="center" style="Margin:0;padding-left:10px;padding-right:10px;padding-top:20px;padding-bottom:40px"><!--[if mso]><a href="https://vendoronboarding.omnicommediagroup.in/" target="_blank" hidden> <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="https://vendoronboarding.omnicommediagroup.in/" style="height:46px; v-text-anchor:middle; width:172px" arcsize="22%" strokecolor="#3d5ca3" strokeweight="2px" fillcolor="#26366a"> <w:anchorlock></w:anchorlock> <center style='color:#ffffff; font-family:arial, "helvetica neue", helvetica, sans-serif; font-size:14px; font-weight:700; line-height:14px; mso-text-raise:1px'>Log in to the Portal</center> </v:roundrect></a><![endif]--><!--[if !mso]><!-- --><span class="msohide es-button-border-2 es-button-border" style="border-style:solid;border-color:#3D5CA3;background:#26366a;border-width:2px;display:inline-block;border-radius:10px;width:auto;mso-hide:all"><a href="https://vendoronboarding.omnicommediagroup.in/" class="es-button es-button-1" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#ffffff;font-size:14px;border-style:solid;border-color:#26366a;border-width:15px 20px;display:inline-block;background:#26366a;border-radius:10px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:bold;font-style:normal;line-height:17px;width:auto;text-align:center">Log in to the Portal</a></span><!--<![endif]--></td>
+        </tr><tr style="border-collapse:collapse"><td align="center" style="Margin:0;padding-left:10px;padding-right:10px;padding-top:20px;padding-bottom:40px"><!--[if mso]><a href="https://vendoronboarding.omnicommediagroup.co.in/" target="_blank" hidden> <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="https://vendoronboarding.omnicommediagroup.co.in/" style="height:46px; v-text-anchor:middle; width:172px" arcsize="22%" strokecolor="#3d5ca3" strokeweight="2px" fillcolor="#26366a"> <w:anchorlock></w:anchorlock> <center style='color:#ffffff; font-family:arial, "helvetica neue", helvetica, sans-serif; font-size:14px; font-weight:700; line-height:14px; mso-text-raise:1px'>Log in to the Portal</center> </v:roundrect></a><![endif]--><!--[if !mso]><!-- --><span class="msohide es-button-border-2 es-button-border" style="border-style:solid;border-color:#3D5CA3;background:#26366a;border-width:2px;display:inline-block;border-radius:10px;width:auto;mso-hide:all"><a href="https://vendoronboarding.omnicommediagroup.co.in/" class="es-button es-button-1" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#ffffff;font-size:14px;border-style:solid;border-color:#26366a;border-width:15px 20px;display:inline-block;background:#26366a;border-radius:10px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:bold;font-style:normal;line-height:17px;width:auto;text-align:center">Log in to the Portal</a></span><!--<![endif]--></td>
         </tr></table></td></tr></table></td></tr></table></td>
     </tr></table><table class="es-footer" cellspacing="0" cellpadding="0" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%;background-color:transparent;background-repeat:repeat;background-position:center top"><tr style="border-collapse:collapse"><td style="padding:0;Margin:0;background-color:#fafafa" bgcolor="#fafafa" align="center"><table class="es-footer-body" cellspacing="0" cellpadding="0" bgcolor="#ffffff" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:transparent;width:600px"><tr style="border-collapse:collapse"><td align="left" bgcolor="#26366A" style="Margin:0;padding-top:10px;padding-bottom:15px;padding-left:20px;padding-right:20px;background-color:#26366a"><table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px"><tr style="border-collapse:collapse"><td valign="top" align="center" style="padding:0;Margin:0;width:560px"><table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px"><tr style="border-collapse:collapse"><td align="left" style="padding:0;Margin:0;padding-top:10px;padding-bottom:10px"><h2 style="Margin:0;line-height:19px;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:16px;font-style:normal;font-weight:normal;color:#f8f7f7"><strong>Have questions?</strong></h2>
     </td></tr><tr style="border-collapse:collapse"><td align="left" style="padding:0;Margin:0;padding-bottom:5px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:21px;color:#ffffff;font-size:14px">We are here to help, <a target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:none;color:#ffffff;font-size:14px" href="">contact us at vendoronboarding@omnicommediagroup.com</a></p></td></tr></table></td></tr></table></td></tr></table></td></tr></table></td></tr></table>
@@ -524,7 +524,7 @@ router.post("/sendgst", async (req, res) => {
       subject: `${data.name} added GSTIN Number`,
       html: `
         <p> Vendor <b> ${data.name}</b> with <b>${data.gstin}</b> GSTIN Number, have registered on the portal.</p>
-            <p>Please validate GST filing status on Portal, <a href="https://admin.omnicommediagroup.in/">click here</a></p>
+            <p>Please validate GST filing status on Portal, <a href="https://admin.omnicommediagroup.co.in/">click here</a></p>
     `,
     };
 
@@ -596,8 +596,8 @@ router.post("/sendforapproval", async (req, res) => {
     </ul>
 </div>
 <div>
-    <a type='button' href="https://vendoronboarding.omnicommediagroup.in/${data?.approval == "1" ? "firstapprove" : "secondapprove"}/${data.new_useruid}/${data.uid}?action=accept&vendorName=${data.legalName}" style="margin-right: 10px; padding: 15px 20px; border-radius: 8px; text-decoration: none; background-color: green; color: #FFF;">Approve</a>
-    <a type='button' href="https://vendoronboarding.omnicommediagroup.in/${data?.approval == "1" ? "firstapprove" : "secondapprove"}/${data.new_useruid}/${data.uid}?action=reject&vendorName=${data.legalName}" style="margin-right: 10px; padding: 15px 20px; border-radius: 8px; text-decoration: none; background-color: #FF0000; color: #FFF;">Reject</a>
+    <a type='button' href="https://vendoronboarding.omnicommediagroup.co.in/${data?.approval == "1" ? "firstapprove" : "secondapprove"}/${data.new_useruid}/${data.uid}?action=accept&vendorName=${data.legalName}" style="margin-right: 10px; padding: 15px 20px; border-radius: 8px; text-decoration: none; background-color: green; color: #FFF;">Approve</a>
+    <a type='button' href="https://vendoronboarding.omnicommediagroup.co.in/${data?.approval == "1" ? "firstapprove" : "secondapprove"}/${data.new_useruid}/${data.uid}?action=reject&vendorName=${data.legalName}" style="margin-right: 10px; padding: 15px 20px; border-radius: 8px; text-decoration: none; background-color: #FF0000; color: #FFF;">Reject</a>
     <br>
 </div>
 `;
@@ -676,8 +676,8 @@ router.post("/finalapprove", async (req, res) => {
     </ul>
 </div>
 <div>
-    <a type='button' href="https://vendoronboarding.omnicommediagroup.in/finalapproval/${data.new_useruid}/${data.uid}?action=accept&vendorName=${data.legalName}" style="margin-right: 10px; padding: 15px 20px; border-radius: 8px; text-decoration: none; background-color: green; color: #FFF;">Send Invite</a>
-    <a type='button' href="https://vendoronboarding.omnicommediagroup.in/finalapproval/${data.new_useruid}/${data.uid}?action=reject&vendorName=${data.legalName}" style="margin-right: 10px; padding: 15px 20px; border-radius: 8px; text-decoration: none; background-color: #FF0000; color: #FFF;">Reject</a>
+    <a type='button' href="https://vendoronboarding.omnicommediagroup.co.in/finalapproval/${data.new_useruid}/${data.uid}?action=accept&vendorName=${data.legalName}" style="margin-right: 10px; padding: 15px 20px; border-radius: 8px; text-decoration: none; background-color: green; color: #FFF;">Send Invite</a>
+    <a type='button' href="https://vendoronboarding.omnicommediagroup.co.in/finalapproval/${data.new_useruid}/${data.uid}?action=reject&vendorName=${data.legalName}" style="margin-right: 10px; padding: 15px 20px; border-radius: 8px; text-decoration: none; background-color: #FF0000; color: #FFF;">Reject</a>
     <br>
 </div>
 `;
