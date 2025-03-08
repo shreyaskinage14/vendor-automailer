@@ -27,17 +27,56 @@ admin.initializeApp({
 router.post('/deleteuser', async (req, res) => {
   try {
     const { uid } = req.body;
-    const user = await admin.auth().getUser(uid);
 
+    console.log(`Received request to delete user: ${uid}`);
+
+    // Check if user exists in Authentication
+    let user;
+    try {
+      user = await admin.auth().getUser(uid);
+      console.log(`User found in Authentication: ${uid}`);
+    } catch (error) {
+      if (error.code === 'auth/user-not-found') {
+        console.log(`User ${uid} already deleted from Authentication.`);
+
+        // Still attempt to delete the user document from Firestore
+        const userRef = admin.firestore().collection('users').doc(uid);
+        const userDoc = await userRef.get();
+
+        if (userDoc.exists) {
+          await userRef.delete();
+          console.log(`User document deleted from Firestore: ${uid}`);
+        } else {
+          console.log(`No Firestore document found for user: ${uid}`);
+        }
+
+        return res.status(200).json({ code: 1, message: 'User was already deleted from Authentication, but removed from Firestore (if existed).' });
+      } else {
+        throw error; // Re-throw unexpected errors
+      }
+    }
+
+    // Check if the user has an email/password provider
     const emailProvider = user.providerData.find(provider => provider.providerId === 'password');
+
     if (emailProvider) {
+      // Delete user from Authentication
       await admin.auth().deleteUser(uid);
-      res.status(200).send({ code: 0, message: 'User Deleted Successfully!' });
+      console.log(`User deleted from Authentication: ${uid}`);
+
+      // Delete user document from Firestore
+      const userRef = admin.firestore().collection('users').doc(uid);
+      await userRef.delete();
+      console.log(`User document deleted from Firestore: ${uid}`);
+
+      return res.status(200).json({ code: 0, message: 'User Deleted Successfully!' });
     } else {
-      res.status(400).send({ code: -1, message: 'User does not have an email/password provider.' });
+      console.log(`User ${uid} does not have an email/password provider.`);
+      return res.status(400).json({ code: -1, message: 'User does not have an email/password provider.' });
     }
   } catch (error) {
-    res.status(500).send({ code: -1, message: `Error deleting email: ${error.message}` });
+    console.error(`Error deleting user: ${error.message}`);
+    return res.status(500).json({ code: -1, message: `Error deleting user: ${error.message}` });
   }
 });
 
